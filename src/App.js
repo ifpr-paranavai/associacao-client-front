@@ -2,6 +2,7 @@
 import './App.css';
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
+import BarraNavegacao from './componentes/BarraNavegacao/BarraNavegacao'
 
 class App extends Component{
   constructor(props){
@@ -10,6 +11,7 @@ class App extends Component{
 
   render(){
     return (<div>
+      <BarraNavegacao />
       <Button variant="light">Light</Button> <Button variant="dark">Dark</Button>{' '}
     </div>);
   }
