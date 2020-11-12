@@ -8,11 +8,11 @@ import React, { Component } from 'react';
 class Rodape extends Component{
   render(){
     return (
-      <div class="border-dark bg-dark text-light">
+      <div class="border-dark bg-dark text-light" id="rodape">
         <div class="container">
           <div class="row">
             <div class="p-4 col-md-4">
-              <img class="img-fluid d-block w-75" src="icones/logo amaer.jpeg" />
+              <img class="img-fluid d-block w-75" src="icones/logo amaer.jpeg" alt="Logo Amaer"/>
               <br />
               <p>Associação Maringaense de Aeromodelismo e Automodelismo.</p>
             </div>
@@ -35,20 +35,20 @@ class Rodape extends Component{
                   <a href="produtos.html" class="text-light">CLASSIFICADOS</a>
                 </li> <br />
                 <li>
-                <a href="index.html#contato" class="text-light">CONTATO</a> 
+                  <a href="index.html#contato" class="text-light">CONTATO</a> 
                 </li>
               </ul>
             </div>
             <div class="p-4 col-md-4">
               <h2 class="mb-4">Contato</h2>
               <p>
-                <a href="#" class="text-light">
+                <a href="#contato" class="text-light">
                   <i class="fa d-inline mr-3 text-muted fa-envelope-o" />
                   associacao@gmail.com
                 </a>
               </p>
               <p class="bg-dark text-light">
-                <a href="#" class="text-dark">
+                <a href="#maringa" class="text-dark">
                   <i class="fa d-inline mr-3 fa-map-marker text-muted" />
                   Maringá | PR
                 </a>

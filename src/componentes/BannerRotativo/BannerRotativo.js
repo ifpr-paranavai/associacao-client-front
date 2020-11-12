@@ -19,7 +19,7 @@ class BannerRotativo extends Component{
     render(){
         const {imagens} = this.state
         return (
-            <Carousel autoPlay infiniteLoop='true' className="h-100">
+            <Carousel autoPlay infiniteLoop='true' className="h-30">
                 {
                     imagens.map(imagem => {
                         return (<Carousel.Item>
