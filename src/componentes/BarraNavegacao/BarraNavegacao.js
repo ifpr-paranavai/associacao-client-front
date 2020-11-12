@@ -1,5 +1,6 @@
 
 import './estilo.css';
+import logo from './../../assets/logo-amaer.png'
 import React, { Component } from 'react';
 import {Navbar, Nav, Container} from 'react-bootstrap';
 import logo from './../../assets/logo.jpeg';
