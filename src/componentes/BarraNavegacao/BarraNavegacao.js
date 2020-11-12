@@ -3,7 +3,6 @@ import './estilo.css';
 import logo from './../../assets/logo-amaer.png'
 import React, { Component } from 'react';
 import {Navbar, Nav, Container} from 'react-bootstrap';
-import logo from './../../assets/logo.jpeg';
 
 
 class BarraNavegacao extends Component{
@@ -14,7 +13,7 @@ class BarraNavegacao extends Component{
 
   render(){
     return (
-        <Navbar  className = "nav-texto-branco" expand = "lg">
+        <Navbar  className = "nav-texto-branco py-4" expand = "lg">
           <Container> 
             <Navbar.Brand href="#home">
               <img

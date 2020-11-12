@@ -1,17 +1,15 @@
 import './App.css';
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
 import BarraNavegacao from './componentes/BarraNavegacao/BarraNavegacao'
+import BannerRotativo from './componentes/BannerRotativo/BannerRotativo'
+import Rodape from './componentes/Rodape/Rodape'
 
 class App extends Component{
-  constructor(props){
-    super(props);
-  }
-
   render(){
     return (<div>
       <BarraNavegacao />
-      <Button variant="light">Light</Button> <Button variant="dark">Dark</Button>{' '}
+      <BannerRotativo />
+      <Rodape />
     </div>);
   }
 }
