@@ -4,7 +4,9 @@ import logo from './../../assets/logo-amaer.png'
 import React, { Component } from 'react';
 import { Container, Image, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebookF} from '@fortawesome/free-brands-svg-icons'
+import { faFacebookSquare, faInstagramSquare} from '@fortawesome/free-brands-svg-icons'
+import { faMapMarker} from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope} from '@fortawesome/free-regular-svg-icons'
 
 // import {Navbar, Nav, Container} from 'react-bootstrap';
 
@@ -46,26 +48,11 @@ class Rodape extends Component{
            
             <Col>
               <p className = "titulo-rodape">Contato</p>
-              <p>
-              <a href="#contato" class="text-light">
-                <i class="fa d-inline mr-3 text-muted fa-envelope-o" />
-                associacao@gmail.com
-              </a>
-            </p>
-            <p class="bg-dark text-light">
-              <a href="#maringa" class="text-dark">
-                <i class="fa d-inline mr-3 fa-map-marker text-muted" />
-                Maringá | PR
-              </a>
-            </p>
-            <p>
-              <i class="fa fa-1x fa-camera-retro">&nbsp; &nbsp; &nbsp; @amaer</i>
-            </p>
-            <p>
-              <FontAwesomeIcon icon={faFacebookF} color="white" />
-              <i class="fa fa-facebook-official">&nbsp; &nbsp; &nbsp;@facebook</i>
-            </p>
-            <a class="btn btn-outline-light text-center" href="index.html#menuopcoes" >Acima</a>
+              <p><FontAwesomeIcon icon={faEnvelope} color="white" size="lg" className="mr-2"/>assoacao@gmail.com</p>           
+              <p><FontAwesomeIcon icon={faMapMarker} color="white" size="lg" className="mr-2"/>Maringá | PR</p>
+              <p><FontAwesomeIcon icon={faInstagramSquare} color="white" size="lg" className="mr-2"/>@amaer</p>
+              <p><FontAwesomeIcon icon={faFacebookSquare} color="white" size="lg" className="mr-2"/>@facebook</p>
+              <a class="btn btn-outline-light text-center" href="index.html#menuopcoes" >Acima</a>
             </Col>
           </Row>
         </Container>
