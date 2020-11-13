@@ -17,11 +17,11 @@ class Rodape extends Component{
       <div className="border-dark bg-dark text-light rodape-fundo-preto" id="rodape">
         <Container className = "p-4"> 
           <Row>
-            <Col>
+            <Col xs = {12} md = {4}>
                 <Image className = "mx-auto d-block" src = {logo} height = "50"/>                   
                 <p className = "text-center pt-4 px-4">Associação Maringaense de Aeromodelismo e Automodelismo.</p>
             </Col>
-            <Col>
+            <Col xs = {12} md = {4}  className = "text-sm-center- text-md-left">
               <p className = "titulo-rodape">Menu</p>
               <ul class="list-unstyled text-light"> 
               <li className = "pt-2">
@@ -46,7 +46,7 @@ class Rodape extends Component{
               
             </Col>
            
-            <Col>
+            <Col xs = {12} md = {4} className = "text-sm-center- text-md-left">
               <p className = "titulo-rodape">Contato</p>
               <p><FontAwesomeIcon icon={faEnvelope} color="white" size="lg" className="mr-2"/>assoacao@gmail.com</p>           
               <p><FontAwesomeIcon icon={faMapMarker} color="white" size="lg" className="mr-2"/>Maringá | PR</p>
