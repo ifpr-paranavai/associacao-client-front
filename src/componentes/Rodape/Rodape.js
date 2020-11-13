@@ -24,23 +24,23 @@ class Rodape extends Component{
             <Col>
               <p className = "titulo-rodape">Menu</p>
               <ul class="list-unstyled text-light"> 
-              <li>
-                <a href="index.html" class="text-light">INÍCIO</a>
+              <li className = "pt-2">
+                <a href="/" className="text-light">INÍCIO</a>
               </li> 
-              <li>
-                <a href="index.html#sobrenos" class="text-light">SOBRE NÓS</a>
+              <li className = "pt-2">
+                <a href="/#sobrenos" className="text-light">SOBRE NÓS</a>
               </li> 
-              <li>
-                <a href="evento.html" class="text-light">EVENTOS</a>
+              <li className = "pt-2">
+                <a href="/eventos" className="text-light">EVENTOS</a>
               </li> 
-              <li>
-                <a href="fotosevideos.html" class="text-light">FOTOS E VÍDEOS</a>
+              <li className = "pt-2">
+                <a href="/fotosevideos" className="text-light">FOTOS E VÍDEOS</a>
               </li> 
-              <li>
-                <a href="produtos.html" class="text-light">CLASSIFICADOS</a>
+              <li className = "pt-2">
+                <a href="/classificados" className = "text-light">CLASSIFICADOS</a>
               </li> 
-              <li>
-                <a href="index.html#contato" class="text-light">CONTATO</a> 
+              <li className = "pt-2">
+                <a href="/#contato" className="text-light">CONTATO</a> 
               </li>
             </ul>
               
@@ -52,7 +52,7 @@ class Rodape extends Component{
               <p><FontAwesomeIcon icon={faMapMarker} color="white" size="lg" className="mr-2"/>Maringá | PR</p>
               <p><FontAwesomeIcon icon={faInstagramSquare} color="white" size="lg" className="mr-2"/>@amaer</p>
               <p><FontAwesomeIcon icon={faFacebookSquare} color="white" size="lg" className="mr-2"/>@facebook</p>
-              <a class="btn btn-outline-light text-center" href="index.html#menuopcoes" >Acima</a>
+              <a class="btn btn-outline-light text-center" href="/#menuopcoes" >Acima</a>
             </Col>
           </Row>
         </Container>

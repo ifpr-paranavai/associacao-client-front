@@ -8,7 +8,7 @@ import {Navbar, Nav, Container} from 'react-bootstrap';
 class BarraNavegacao extends Component{
   render(){
     return (
-        <Navbar className="nav-texto-branco py-4" expand="lg" sticky="top">
+        <Navbar className="nav-texto-branco py-4" expand="lg" sticky="top" id = "menuopcoes">
           <Container> 
             <Navbar.Brand href="#home">
               <img
@@ -25,12 +25,12 @@ class BarraNavegacao extends Component{
                 <Nav.Link href="/">INÍCIO</Nav.Link>
                 <Nav.Link href="/#sobre">SOBRE NÓS</Nav.Link>
                 <Nav.Link href="/eventos">EVENTOS</Nav.Link>
-                <Nav.Link href="#link">FOTOS E VÍDEOS</Nav.Link>
-                <Nav.Link href="#link">CLASSIFICADOS</Nav.Link>
-                <Nav.Link href="/#rodape">CONTATO</Nav.Link>
+                <Nav.Link href="/fotosevideos">FOTOS E VÍDEOS</Nav.Link>
+                <Nav.Link href="/classificados">CLASSIFICADOS</Nav.Link>
+                <Nav.Link href="/#contato">CONTATO</Nav.Link>
                </Nav>
                <Nav>
-                <Nav.Link href="#link" className="ml-md-2 btn btn-outline-light">Associe-se</Nav.Link>
+                <Nav.Link href="/cadastro" className="ml-md-2 btn btn-outline-light">Associe-se</Nav.Link>
                 <Nav.Link href="#link" className="ml-md-2 mt-md-2 mt-lg-0 btn btn-outline-light">Área de Associado</Nav.Link>
               </Nav>
             </Navbar.Collapse>
