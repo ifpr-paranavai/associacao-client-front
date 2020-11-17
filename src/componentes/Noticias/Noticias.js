@@ -1,6 +1,9 @@
 
 import './estilo.css';
-import logo from './../../assets/logo-amaer.png'
+import aeromodelismo from './../../assets/aeromodelismo.jpg'
+import automodelismo from './../../assets/automodelismo.jpg'
+import palestra from './../../assets/palestra.jpg'
+
 import React, { Component } from 'react';
 import { Container, Card, CardDeck, CardFooter, CardImg, CardTitle, CardText, CardBody,  } from 'react-bootstrap';
 
@@ -15,12 +18,17 @@ class Noticias extends Component{
         <div className="container">
           <div className="row">
             <div className="mx-auto col-md-12">
-              <h1 className="mb-3 mt-3 text-dark" ><b>Notícias&nbsp;</b></h1>
+              <h1 className="mb-3 mt-3 text-dark">
+                <b>Notícias&nbsp;</b>
+              </h1>
             </div>
           </div>
-          <CardDeck>
-            <Card>
-              <Card.Img variant="top" src="./src/assets/aeromodelismo.jpg" />
+          <CardDeck > 
+            <Card className = "col-6 col-lg-3 p-4 my-3 mx-4 borda-cards-noticias"> 
+              <Card.Img variant="top" 
+                src= {aeromodelismo} 
+                height="50%"
+                />
               <Card.Body>
                 <Card.Title>Notícia 1</Card.Title>
                 <Card.Text>
@@ -29,8 +37,11 @@ class Noticias extends Component{
                 </Card.Text>
               </Card.Body>
             </Card>
-            <Card>
-              <Card.Img variant="top" src="holder.js/100px160" />
+            <Card className = "col-6 col-lg-3 p-4 my-3 mx-4 borda-cards-noticias">
+              <Card.Img variant="top" 
+                src= {automodelismo} 
+                height= "50%"
+                />
               <Card.Body>
                 <Card.Title>Notícia 2</Card.Title>
                 <Card.Text>
@@ -39,8 +50,12 @@ class Noticias extends Component{
                 </Card.Text>
               </Card.Body>
             </Card>
-            <Card>
-              <Card.Img variant="top" src="holder.js/100px160" />
+            <Card className = "col-6 col-lg-3 p-4 my-3 mx-4 borda-cards-noticias">
+              <Card.Img 
+                variant="top" 
+                src= {palestra} 
+                height="50%"
+                />
               <Card.Body>
                 <Card.Title>Notícia 3</Card.Title>
                 <Card.Text>

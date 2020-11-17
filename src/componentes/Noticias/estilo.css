@@ -1,8 +1,10 @@
-.rodape-fundo-preto{
-    background-color: black !important;
+.borda-cards-noticias{
+    box-shadow: rgb(163, 163, 163)  3px 3px 15px  !important;
 }
 
-.titulo-rodape{
-    font-size: 22pt !important;
+.titulo-noticia{
+    font-size: 100pt !important;
 }
+
+
 
