@@ -1,73 +1,53 @@
 
 import './estilo.css';
-import aeromodelismo from './../../assets/aeromodelismo.jpg'
-import automodelismo from './../../assets/automodelismo.jpg'
-import palestra from './../../assets/palestra.jpg'
-
+import HomeService from './../../service/HomeService'
 import React, { Component } from 'react';
-import { Container, Card, CardDeck, CardFooter, CardImg, CardTitle, CardText, CardBody,  } from 'react-bootstrap';
+import { Container, Card, CardDeck, Row, Button} from 'react-bootstrap';
 
 
 // import {Navbar, Nav, Container} from 'react-bootstrap';
 
 
 class Noticias extends Component{
+  constructor (props){
+    super(props);
+    this.state = {
+        noticias: []
+    }
+  }
+  async componentDidMount() {
+      let noticias = await HomeService.obterNoticias();
+      this.setState({ noticias })
+  }
   render(){
+    const {noticias} = this.state
     return (
-      <div className="py-5 text-center"  id="idnoticias idnoticias">
-        <div className="container">
-          <div className="row">
-            <div className="mx-auto col-md-12">
-              <h1 className="mb-3 mt-3 text-dark">
-                <b>Notícias&nbsp;</b>
-              </h1>
-            </div>
-          </div>
-          <CardDeck > 
-            <Card className = "col-6 col-lg-3 p-4 my-3 mx-4 borda-cards-noticias"> 
-              <Card.Img variant="top" 
-                src= {aeromodelismo} 
-                height="50%"
-                />
-              <Card.Body>
-                <Card.Title>Notícia 1</Card.Title>
-                <Card.Text>
-                  Este evento ocorreu no dia 16/11/2020, com duração de 5h. Participou como palestrante do evento
-                  João Martins.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <Card className = "col-6 col-lg-3 p-4 my-3 mx-4 borda-cards-noticias">
-              <Card.Img variant="top" 
-                src= {automodelismo} 
-                height= "50%"
-                />
-              <Card.Body>
-                <Card.Title>Notícia 2</Card.Title>
-                <Card.Text>
-                  Este evento ocorreu no dia 16/11/2020, com duração de 5h. Participou como palestrante do evento
-                  João Martins.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <Card className = "col-6 col-lg-3 p-4 my-3 mx-4 borda-cards-noticias">
-              <Card.Img 
-                variant="top" 
-                src= {palestra} 
-                height="50%"
-                />
-              <Card.Body>
-                <Card.Title>Notícia 3</Card.Title>
-                <Card.Text>
-                  Este evento ocorreu no dia 16/11/2020, com duração de 5h. Participou como palestrante do evento
-                  João Martins.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </CardDeck>
-        </div>
-      </div>
       
+        <Container>
+          <Row className="justify-content-center">
+            <h1 className="mb-3 mt-3 text-dark text-xs-center">Notícias</h1>
+          </Row>
+          <CardDeck className="mb-3">
+            {
+              noticias.map(noticia => {
+                return (
+                  <Card className = "col-6 col-lg-4 p-4 my-3 mx-4 borda-cards-noticias">
+                    <Card.Img variant="top" 
+                      src= {noticia.src}
+                    />
+                    <Card.Body>
+                      <Card.Title>{noticia.titulo} </Card.Title>
+                      <Card.Text>{noticia.chamada} </Card.Text>
+                    </Card.Body>
+                  </Card>
+                )}
+              )
+            }
+          </CardDeck>
+          <Row className="justify-content-end">
+            <Button href="/noticias" variant="info" size="lg">+ Notícias</Button>
+          </Row>
+        </Container>      
     )
   }
 }

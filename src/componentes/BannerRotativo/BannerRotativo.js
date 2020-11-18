@@ -1,7 +1,7 @@
 
 import './estilo.css';
 import React, { Component } from 'react';
-import { Carousel } from 'react-bootstrap';
+import { Carousel, Container } from 'react-bootstrap';
 import HomeService from './../../service/HomeService'
 
 
@@ -20,23 +20,26 @@ class BannerRotativo extends Component{
     render(){
         const {imagens} = this.state
         return (
-            <Carousel autoPlay infiniteLoop='true' className="h-30">
-                {
-                    imagens.map(imagem => {
-                        return (<Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src={imagem.src}
-                            alt={imagem.alt}
-                            />
-                            <Carousel.Caption>
-                                <h3>{imagem.label}</h3>
-                                <p>{imagem.descricao}</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>)
-                    })
-                }
-            </Carousel>
+            <Container>
+                <Carousel autoPlay infiniteLoop='true' className="h-30">
+                    {
+                        imagens.map(imagem => {
+                            return (<Carousel.Item 
+                                key={imagem.id}>
+                                <img
+                                className="d-block w-100"
+                                src={imagem.src}
+                                alt={imagem.alt}
+                                />
+                                <Carousel.Caption>
+                                    <h3>{imagem.label}</h3>
+                                    <p>{imagem.descricao}</p>
+                                </Carousel.Caption>
+                            </Carousel.Item>)
+                        })
+                    }
+                </Carousel>
+            </Container>
         );
     }
 }
