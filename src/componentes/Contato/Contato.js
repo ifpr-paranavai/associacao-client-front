@@ -2,7 +2,7 @@
 import './estilo.css';
 import HomeService from '../../service/HomeService'
 import React, { Component } from 'react';
-import { Form, Container, Row, FormControl, Col } from 'react-bootstrap';
+import { Form, Container, Row, FormControl, Col, Button } from 'react-bootstrap';
 
 
 // import {Navbar, Nav, Container} from 'react-bootstrap';
@@ -14,30 +14,28 @@ class Contato extends Component{
     
         return (
           <Container>
-              <Row>
-                <h1 className="mb-3 mt-3 text-dark text-xs-center">
+              <Row className="justify-content-center mb-5"> 
+                <h1 className="my-3">
                   Contato
                 </h1>
               </Row>
-              <Form>
-                <Row className = "my-3 ">
-                  <Col > 
-                    <Form.Control placeholder="Nome" size="lg"  />
-                  </Col>
+              <Form className = "p-5 formulario-contato">
+                <Row >
                   <Col>
-                    <Form.Control placeholder="Email" size="lg"  />
+                    <Form.Control  className="mb-5" placeholder="Nome" size="lg"  />
+                    <Form.Control className="mb-5"  placeholder="E-mail" size="lg" />
+                    <Form.Control className="mb-5"  placeholder="Assunto" size="lg" />
+                  </Col>
+                  <Col className="text-center">
+                    <Form.Control className="mb-4" as="textarea" rows={4} placeholder="Sua mensagem" size="lg" />
+                    <Button className="mx-auto" size="lg" variant="primary" type="submit" >
+                        Enviar
+                    </Button>
                   </Col>
                 </Row>
-                <Row className = "my-3">
-                  <Col>
-                      <Form.Control placeholder="Assunto" size="lg" />
-                  </Col>
-                </Row>
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                  <Form.Control as="textarea" rows={3} placeholder="Sua mensagem" size="lg" />
-                </Form.Group>
 
               </Form>
+              
           </Container>         
     )
   }
@@ -45,21 +43,3 @@ class Contato extends Component{
 
 export default Contato;
 
-/*<div class="py-3 text-center" style="" id="contato">
-    <div class="container">
-      <div class="row shadow-lg" style="	box-shadow: 3px 3px   gray;">
-        <div class="mx-auto p-4 col-lg-7">
-          <h1 class="mb-4 text-dark" style=""><b>Contato</b></h1>
-          <form>
-            <div class="form-row">
-              <div class="form-group col-md-6"> <input type="text" class="form-control" id="form27" placeholder="Nome"> </div>
-              <div class="form-group col-md-6"> <input type="email" class="form-control" id="form28" placeholder="Email"> </div>
-            </div>
-            <div class="form-group"> <input type="text" class="form-control" id="form29" placeholder="Ass
-unto" style=""> </div>
-            <div class="form-group"> <textarea class="form-control" id="form30" rows="3" placeholder="Sua mensagem"></textarea> </div>
-          </form><button type="submit" class="btn w-25 btn-dark text-light" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">Enviar</button>
-        </div>
-      </div>
-    </div>
-</div> */

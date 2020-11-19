@@ -31,12 +31,12 @@ class Home extends Component{
                         </section>
 
                         <Parallax
-                              blur={{ min: -15, max: 15 }}
-                              bgImage="https://scontent.fmgf6-1.fna.fbcdn.net/v/t1.0-9/39389913_1910707792330821_2245948891407056896_n.jpg?_nc_cat=102&ccb=2&_nc_sid=e3f864&_nc_ohc=LOA9ugbuX4EAX8MjOol&_nc_ht=scontent.fmgf6-1.fna&oh=bc7c9c532469eec4e055771fff3336c2&oe=5FD88022"
+                              //blur={{ min: -15, max: 15 }}
+                              bgImage="https://cdn.pixabay.com/photo/2013/08/06/19/13/plane-170272_960_720.jpg"
                               bgImageAlt="Amaer"
                               strength={-200}
                         >
-                              <section className="py-5 remover" id="contato">
+                              <section className="py-5" id="contato">
                                     <Contato />
                               </section>
                         </Parallax>

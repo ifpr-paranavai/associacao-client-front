@@ -30,7 +30,7 @@ class BarraNavegacao extends Component{
                 <Nav.Link href="/#contato">CONTATO</Nav.Link>
                </Nav>
                <Nav>
-                <Nav.Link href="/cadastro" className="ml-md-2 btn btn-outline-light">Associe-se</Nav.Link>
+                <Nav.Link href="/associar" className="ml-md-2 btn btn-outline-light">Associe-se</Nav.Link>
                 <Nav.Link href="#link" className="ml-md-2 mt-md-2 mt-lg-0 btn btn-outline-light">Área de Associado</Nav.Link>
               </Nav>
             </Navbar.Collapse>

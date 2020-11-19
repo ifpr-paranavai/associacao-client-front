@@ -25,7 +25,7 @@ class SobreNos extends Component{
             <Container className="text-white">
                 <Row>
                     <Col className="px-lg-5 d-flex flex-column justify-content-center shadow-lg">
-                        <h1 className="text-center"><b>A Amaer&nbsp;</b></h1>
+                        <h1 className="text-center">A Amaer</h1>
                         <p className="mb-3 lead">{sobre.texto}</p>
                     </Col>
                     <Col> 

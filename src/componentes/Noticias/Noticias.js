@@ -21,6 +21,7 @@ class Noticias extends Component{
   }
   render(){
     const {noticias} = this.state
+    let noticias2 = this.state.noticias;
     return (
       
         <Container>
