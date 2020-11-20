@@ -1,39 +1,7 @@
 
 
 class HomeService{
-    static obterImagensDoBanner(){
-        const imagens = [
-            {
-                id:1,
-                src: "https://mdbootstrap.com/img/Photos/Slides/img%20(35).jpg",
-                alt: "First slide",
-                label: "First slide label",
-                descricao: "Nulla vitae elit libero, a pharetra augue mollis interdum."
-            },
-            {
-                id:2,
-                src: "https://mdbootstrap.com/img/Photos/Slides/img%20(36).jpg",
-                alt: "Segundo slide",
-                label: "Segundo slide label",
-                descricao: "Nulla vitae elit libero, a pharetra augue mollis interdum."
-            },
-            {
-                id:3,
-                src: "https://mdbootstrap.com/img/Photos/Slides/img%20(37).jpg",
-                alt: "Terceiro slide",
-                label: "Terceiro slide label",
-                descricao: "Nulla vitae elit libero, a pharetra augue mollis interdum."
-            },
-            {
-                id:4,
-                src: "https://mdbootstrap.com/img/Photos/Slides/img%20(34).jpg",
-                alt: "Terceiro slide",
-                label: "Terceiro slide label",
-                descricao: "Nulla vitae elit libero, a pharetra augue mollis interdum."
-            }
-        ]
-        return imagens;
-    }
+    
     static obterNoticias(){
         const noticias = [
             {
@@ -64,7 +32,7 @@ class HomeService{
         const sobre = 
             {
                 texto: "Texto sobre a associação aeromodelismo.",
-                src: "https://static.pingendo.com/cover-moon.svg",
+                src: "https://cdn.pixabay.com/photo/2014/01/14/23/32/viper-jet-245300_960_720.jpg",
                 alt: "Não carregou"
                 
             }

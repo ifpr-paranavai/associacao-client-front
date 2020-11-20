@@ -46,7 +46,7 @@ class Noticias extends Component{
             }
           </CardDeck>
           <Row className="justify-content-end">
-            <Button href="/noticias" variant="info" size="lg">+ Notícias</Button>
+            <Button href="/noticias" variant="secondary" size="lg">+ Notícias</Button>
           </Row>
         </Container>      
     )

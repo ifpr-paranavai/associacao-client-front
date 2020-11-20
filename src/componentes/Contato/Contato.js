@@ -28,7 +28,7 @@ class Contato extends Component{
                   </Col>
                   <Col className="text-center">
                     <Form.Control className="mb-4" as="textarea" rows={4} placeholder="Sua mensagem" size="lg" />
-                    <Button className="mx-auto" size="lg" variant="primary" type="submit" >
+                    <Button className="mx-auto cor-botao" size="lg" variant="secondary" type="submit" >
                         Enviar
                     </Button>
                   </Col>
