@@ -22,8 +22,8 @@ class SobreNos extends Component{
       render(){
         const {sobre} = this.state
         return (
-            <Container className="text-white">
-                <Row>
+            <Container className="text-white h-100">
+                <Row className="h-100 align-items-center">
                     <Col className="px-lg-5 d-flex flex-column justify-content-center shadow-lg">
                         <h1 className="text-center">A Amaer</h1>
                         <p className="mb-3 lead">{sobre.texto}</p>

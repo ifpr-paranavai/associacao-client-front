@@ -19,8 +19,8 @@ class Contato extends Component{
                   Contato
                 </h1>
               </Row>
-              <Form className = "p-5 formulario-contato">
-                <Row >
+              <Form className = "p-5 mb-4 mx-5 formulario-contato">
+                <Row>
                   <Col>
                     <Form.Control  className="mb-5" placeholder="Nome" size="lg"  />
                     <Form.Control className="mb-5"  placeholder="E-mail" size="lg" />

@@ -8,7 +8,7 @@ import {Navbar, Nav, Container} from 'react-bootstrap';
 class BarraNavegacao extends Component{
   render(){
     return (
-        <Navbar className="nav-texto-branco py-4" expand="lg" sticky="top" id = "menuopcoes">
+        <Navbar className="nav-texto-branco py-4" expand="lg" fixed="top" id = "menuopcoes">
           <Container> 
             <Navbar.Brand href="#home">
               <img

@@ -23,7 +23,7 @@ class Rodape extends Component{
             </Col>
             <Col xs = {12} md = {4}  className = "text-sm-center text-md-left">
               <p className = "titulo-rodape">Menu</p>
-              <ul class="list-unstyled text-light"> 
+              <ul className="list-unstyled text-light"> 
               <li className = "pt-2">
                 <a href="/" className="text-light">INÍCIO</a>
               </li> 
@@ -52,7 +52,7 @@ class Rodape extends Component{
               <p><FontAwesomeIcon icon={faMapMarker} color="white" size="lg" className="mr-2"/>Maringá | PR</p>
               <p><FontAwesomeIcon icon={faInstagramSquare} color="white" size="lg" className="mr-2"/>@amaer</p>
               <p><FontAwesomeIcon icon={faFacebookSquare} color="white" size="lg" className="mr-2"/>@facebook</p>
-              <a class="btn btn-outline-light text-center" href="/#menuopcoes" >Acima</a>
+              <a className="btn btn-outline-light text-center" href="/#menuopcoes" >Acima</a>
             </Col>
           </Row>
         </Container>

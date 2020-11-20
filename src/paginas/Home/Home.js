@@ -10,22 +10,23 @@ class Home extends Component{
       render(){
             return (
                   <>
-                         <section className="fundo-preto py-5" id="sobrenos">
-                              <SobreNos />
-                        </section>
+                        
                         <Parallax
                               blur={{ min: -15, max: 15 }}
-                             // bgImage="https://scontent.fmgf6-1.fna.fbcdn.net/v/t1.0-9/39409339_1910707798997487_917810807230693376_n.jpg?_nc_cat=102&ccb=2&_nc_sid=e3f864&_nc_ohc=n28bEkKX-KcAX8Id6HL&_nc_ht=scontent.fmgf6-1.fna&oh=dcc3b67be0e9dd251981721e46a93f48&oe=5FDA4661"
+                        // bgImage="https://scontent.fmgf6-1.fna.fbcdn.net/v/t1.0-9/39409339_1910707798997487_917810807230693376_n.jpg?_nc_cat=102&ccb=2&_nc_sid=e3f864&_nc_ohc=n28bEkKX-KcAX8Id6HL&_nc_ht=scontent.fmgf6-1.fna&oh=dcc3b67be0e9dd251981721e46a93f48&oe=5FDA4661"
                               bgImage="https://cdn.pixabay.com/photo/2017/09/07/14/33/cloud-2725520_960_720.jpg"
 
                               bgImageAlt="Amaer"
-                              strength={-200}
+                              strength={200}
                         >
-                              <section className="py-5 text-center"  id="idnoticias">
-                                    <Noticias />
+                              <section className="principal py-5" id="sobrenos">
+                                    <SobreNos />
                               </section>
                         </Parallax>
                         
+                        <section className="fundo-preto py-5 text-center"  id="idnoticias">
+                              <Noticias />
+                        </section>
                        
 
                         <Parallax
