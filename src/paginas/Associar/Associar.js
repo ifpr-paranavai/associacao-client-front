@@ -1,7 +1,10 @@
 import './estilo.css';
 import React, { Component} from 'react';
 import AssociarService from '../../service/AssociarService'
-import { Form, Container, Row, Col, Button} from 'react-bootstrap';
+import { Form, Container, Row, Col, Button, Card} from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser} from '@fortawesome/free-solid-svg-icons'
+
 
 
 class Associar extends Component{
@@ -13,24 +16,56 @@ class Associar extends Component{
   }
   render(){
     return (
+      
       <Container className="mt-5 pt-5 ">
-          <Row className="justify-content-center mb-5"> 
+        <Card className="efeito-card-form px-5 my-5"> 
+          <Row className="justify-content-center mb-5 mx-5"> 
             <h1 className="my-3">
               Associe-se
             </h1>
           </Row>
-          <Form className = "pb-5 formulario-contato" onSubmit={this.handleSubmit}>
-            <Row >
-              <Col>
-                <Form.File className="mb-3" id="formcheck-api-regular">
-                <Form.File.Label>Imagem</Form.File.Label>
-                <Form.File.Input />
-                </Form.File>
-                <Form.Control  className="mb-4" placeholder="Nome de Usuário" id="usuario" name="usuario" size="lg"  />
-                <Form.Control  className="mb-4" placeholder="Nome Completo" id="nome" name="nome" size="lg"  />
-                <Form.Control className="mb-4" type="date" placeholder="RG" id="dataNasc" name="dataNasc" size="lg" />
-                <Form.Control className="mb-4"  placeholder="CPF" id="cpf" name="cpf" size="lg" />
+          <Row className="justify-content-center mb-5 mx-5">
+            <Form className = "formulario-contato" onSubmit={this.handleSubmit}>
+              <Form.Row>
+                <Form.Group as={Col} controlId="imagem"> 
+                  <Form.File className="mb-3" label="imagem" />        
+                </Form.Group>
+              </Form.Row>
+              <Form.Row>
+                <h3 class="py-3">
+                  <FontAwesomeIcon icon={faUser} size="md" className="mr-2"/>
+                  &nbsp;Dados do usuário
+                </h3>
+              </Form.Row>
+              <Form.Row>
+                <Form.Group as={Col}>
+                  <Form.Control  className="mb-4" placeholder="Nome" id="nome" name="nome" size="lg"/>
+                </Form.Group>
+              </Form.Row>
+              <Form.Row>
+                <Form.Group as={Col}>
+                  <Form.Control  className="mb-4" placeholder="Sobrenome" id="sobrenome" name="sobrenome" size="lg"  />
+                </Form.Group>
+              </Form.Row>
+              <Form.Row>
+                <Form.Group className="col-sm-12 col-md-6" as={Col}>
+                  <Form.Control className="mb-4" type="date" placeholder="Data de Nascimento" id="dataNasc" name="dataNasc" size="lg" />
+                </Form.Group>
+                <Form.Group className="col-sm-12 col-md-6" controlId="cpf" as={Col}>
+                  <Form.Control className="mb-4"  placeholder="CPF" name="cpf" size="lg" />
+                </Form.Group>
+                
+              </Form.Row>
+              <Col> 
+                
+               
+               
+                
+                
                 <Form.Control className="mb-4"  placeholder="RG" id="rg" name="rg" size="lg" />  
+                <Form.Control  className="mb-4" placeholder="CEP" id="cep" name="cep" size="lg"  />
+                <Form.Control  className="mb-4" placeholder="Estado" id="estado" name="estado" size="lg"  />   
+                <Form.Control  className="mb-4" placeholder="Cidade" id="cidade" name="cidade" size="lg"  /> 
                 <Row>
                   <Col>
                     <Form.Control  className="mb-4" placeholder="Rua" id="rua" name="rua" size="lg"  />
@@ -38,10 +73,8 @@ class Associar extends Component{
                   <Col>
                     <Form.Control  className="mb-4" placeholder="Número" id="numero" name="numero" size="lg"  />
                   </Col>
-                </Row>   
-                <Form.Control  className="mb-4" placeholder="Cidade" id="cidade" name="cidade" size="lg"  />
-                <Form.Control  className="mb-4" placeholder="Estado" id="estado" name="estado" size="lg"  />
-                <Form.Control  className="mb-4" placeholder="CEP" id="cep" name="cep" size="lg"  />
+                </Row>
+                         
                 <Form.Control  className="mb-4" placeholder="Telefone Residencial" id="telresi" name="telresi" size="lg"  />     
                 <Form.Control  className="mb-4" placeholder="Telefone Celular" id="telcel" name="telcel" size="lg"  />   
                 <Form.Control  className="mb-4" placeholder="Telefone Comercial" id="telcom" name="telcom" size="lg"  />  
@@ -59,12 +92,7 @@ class Associar extends Component{
                 <Form.Label className="tamanho-texto my-2">
                   Quantidade de dependentes 
                 </Form.Label > 
-                <Form.Control className="mb-3" as="select" size="lg" custom>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <Form.Control className="mb-3" type="number" min="0" size="lg">
                 </Form.Control>
                 <Form.Control  className="mb-4" placeholder="Nome dos Dependentes" id="dependentes" name="dependentes" size="lg"  />   
                 <Form.Label className="tamanho-texto">
@@ -79,14 +107,15 @@ class Associar extends Component{
                     <Form.Control  className="mb-4" type="password" placeholder="Confirmar Senha" id="confirmarsenha" name="confirmarsenha" size="lg"  /> 
                   </Col>
                 </Row>
-                <Button  size="lg" variant="secondary" type="submit" >
-                    Enviar
-                </Button>
-              </Col>
-            </Row>
-
-          </Form>
-          
+                <Row className="justify-content-center">
+                  <Button  size="lg" variant="secondary" type="submit" >
+                      Enviar
+                  </Button>
+                </Row>
+              </Col >
+            </Form>
+          </Row>
+        </Card>
       </Container>         
     )
   }
