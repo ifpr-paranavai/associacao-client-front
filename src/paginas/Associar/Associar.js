@@ -3,9 +3,10 @@ import React, { Component} from 'react';
 import AssociarService from '../../service/AssociarService'
 import { Form, Container, Row, Col, Button, Card} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser} from '@fortawesome/free-solid-svg-icons'
+import { faUser, faHome, faPhoneAlt} from '@fortawesome/free-solid-svg-icons'
 import MaskedFormControl from '../../componentes/MaskedFormControl/MaskedFormControl'
 import estados from '../../uteis/estados'
+import ModalAssociar from '../../componentes/Modal'
 
 
 
@@ -52,6 +53,9 @@ class Associar extends Component{
   render(){
     return (
       <Container className="mt-5 pt-5 ">
+        <ModalAssociar>
+          
+        </ModalAssociar>
         <Card className="efeito-card-form px-5 my-5"> 
           <Row className="justify-content-center mb-5 mx-5"> 
             <h1 className="my-3">Associe-se</h1>
@@ -91,7 +95,15 @@ class Associar extends Component{
                 <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="rg">
                   <Form.Control placeholder="RG" name="rg" size="lg" />  
                 </Form.Group>
-                <Form.Group className="col-sm-12 col-md-6" controlId="cep" as={Col}>
+              </Form.Row>
+              <Form.Row>
+                <h3 className="py-3">
+                  <FontAwesomeIcon icon={faHome} size="1x" className="mr-2"/>
+                  Endereço
+                </h3>
+              </Form.Row>
+              <Form.Row>
+                <Form.Group controlId="cep" as={Col}>
                   <MaskedFormControl  
                     placeholder="CEP" 
                     name="cep"
@@ -132,6 +144,12 @@ class Associar extends Component{
                 <Form.Group className="col-sm-12 col-md-4" controlId="numero" as={Col}>
                   <Form.Control placeholder="Número" name="numero" size="lg"  />
                 </Form.Group>
+              </Form.Row>
+              <Form.Row>
+                <h3 className="py-3">
+                  <FontAwesomeIcon icon={faPhoneAlt} size="1x" className="mr-2"/>
+                  Contato
+                </h3>
               </Form.Row>
               <Form.Row>
                 <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="telcel">

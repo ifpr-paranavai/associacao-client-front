@@ -1,0 +1,8 @@
+.nav-texto-branco * {
+    color: white !important;
+    
+}
+
+.nav-texto-branco {
+    background-color: black;
+}

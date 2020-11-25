@@ -1,4 +1,6 @@
 import Axios from 'axios';
+import textoModal from '../uteis/textoModal'
+
 
 class AssociarService{
     static postarDadosDoFormulario(dadosDoFormulario){
@@ -23,6 +25,11 @@ class AssociarService{
             console.log(error)
             return error;
         }
+    }
+
+    static async buscarTextoModal(){
+        
+       return await textoModal;
     }
 }
 
