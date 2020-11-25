@@ -1,4 +1,4 @@
-
+import Axios from 'axios';
 
 class AssociarService{
     static postarDadosDoFormulario(dadosDoFormulario){
@@ -14,6 +14,15 @@ class AssociarService{
         console.log("AssociarServiceFazer uma requisição post para api quando implementada")
         console.log(json)
         return json;
+    }
+    static async buscarCEP(cep){
+        try{
+            const {data} = await Axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+            return data
+        }catch(error){
+            console.log(error)
+            return error;
+        }
     }
 }
 
