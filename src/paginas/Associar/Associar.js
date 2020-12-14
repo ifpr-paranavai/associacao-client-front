@@ -64,7 +64,7 @@ class Associar extends Component{
             <Form className = "formulario-contato" onSubmit={this.handleSubmit}>
               <Form.Row>
                 <Form.Group as={Col} controlId="imagem"> 
-                  <Form.File className="mb-3" label="Foto 3x4" />        
+                  <Form.File className="mb-3" label="Foto 3x4" name = "imagem" />        
                 </Form.Group>
               </Form.Row>
               <Form.Row>
@@ -85,7 +85,7 @@ class Associar extends Component{
               </Form.Row>
               <Form.Row>
                 <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="dataNasc">
-                  <Form.Control type="date" placeholder="Data de Nascimento" name="dataNasc" size="lg" />
+                  <Form.Control type="date" placeholder="Data de Nascimento" name="data_nascimento" size="lg" />
                 </Form.Group>
                 <Form.Group className="col-sm-12 col-md-6" controlId="" as={Col}>
                   <MaskedFormControl  placeholder="CPF" name="cpf" size="lg" mask="111.111.111-11" />
@@ -153,7 +153,7 @@ class Associar extends Component{
               </Form.Row>
               <Form.Row>
                 <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="telcel">
-                  <MaskedFormControl mask="(11) 1 1111-1111" placeholder="Telefone Celular" name="telcel" size="lg"  />     
+                  <MaskedFormControl mask="(11) 1 1111-1111" placeholder="Telefone Celular" name="tel_celular" size="lg"  />     
                 </Form.Group>
                 <Form.Group className="col-sm-12 col-md-6" controlId="whatsapp" as={Col}>
                   <Form.Check className="tamanho-texto ml-3 mt-2"  name="whatsapp" type="checkbox" label="Celular com WhatsApp?" />
@@ -161,10 +161,10 @@ class Associar extends Component{
               </Form.Row>
               <Form.Row>
                 <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="telresi">
-                  <MaskedFormControl mask="(11) 1111-1111" placeholder="Telefone Residencial" name="telresi" size="lg"  />
+                  <MaskedFormControl mask="(11) 1111-1111" placeholder="Telefone Residencial" name="tel_residencial" size="lg"  />
                 </Form.Group>
                 <Form.Group className="col-sm-12 col-md-6" controlId="telcom" as={Col}>
-                  <MaskedFormControl mask="(11) 1111-1111" placeholder="Telefone Comercial" name="telcom" size="lg"  />
+                  <MaskedFormControl mask="(11) 1111-1111" placeholder="Telefone Comercial" name="tel_comercial" size="lg"  />
                 </Form.Group>
               </Form.Row>
               <Form.Row>
@@ -174,7 +174,7 @@ class Associar extends Component{
               </Form.Row>
               <Form.Row>
                 <Form.Group controlId="emailalter" as={Col}>
-                  <Form.Control placeholder="E-mal alternativo" type="email" name="emailalter" size="lg" />   
+                  <Form.Control placeholder="E-mal alternativo" type="email" name="email_alternativo" size="lg" />   
                 </Form.Group>
               </Form.Row>
               <Form.Row>
@@ -187,7 +187,7 @@ class Associar extends Component{
                 </Col>
               </Form.Row>
               <Form.Row>
-                <Form.Check name="noticias" className="tamanho-texto my-3 ml-2" type="checkbox" label="Aceito receber comunicados oficiais oriundos da diretoria da Amaer" />
+                <Form.Check name="receber_comunicado" className="tamanho-texto my-3 ml-2" type="checkbox" label="Aceito receber comunicados oficiais oriundos da diretoria da Amaer" />
               </Form.Row>
               <Form.Row className="justify-content-center mt-3">
                 <Button  size="lg" variant="secondary" type="submit" >Enviar</Button>
