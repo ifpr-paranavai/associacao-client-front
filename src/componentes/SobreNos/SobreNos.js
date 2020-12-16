@@ -29,7 +29,7 @@ class SobreNos extends Component{
                         <p className="mb-3 lead">{sobre.texto}</p>
                     </Col>
                     <Col> 
-                        <img className="img-fluid d-block shadow-lg" 
+                        <img className="img-fluid d-block " 
                         src={sobre.src}
                         alt={sobre.alt}/> 
                     </Col>

@@ -21,10 +21,9 @@ class Noticias extends Component{
   }
   render(){
     const {noticias} = this.state
-    let noticias2 = this.state.noticias;
     return (
       
-        <Container>
+        <Container >
           <Row className="justify-content-center">
             <h1 className="mb-3 mt-3 text-dark text-xs-center">Notícias</h1>
           </Row>
@@ -32,13 +31,14 @@ class Noticias extends Component{
             {
               noticias.map(noticia => {
                 return (
-                  <Card className = "col-6 col-lg-4 p-4 my-3 mx-4 borda-cards-noticias">
+                  <Card className = "col-6 col-lg-4 p-4 my-3 mx-4 borda-cards-noticias" key={noticia._id}>
                     <Card.Img variant="top" 
                       src= {noticia.src}
                     />
                     <Card.Body>
                       <Card.Title>{noticia.titulo} </Card.Title>
-                      <Card.Text>{noticia.chamada} </Card.Text>
+                      <Card.Text>{noticia.subtitulo} </Card.Text>
+                      <Card.Text>{noticia.corpo} </Card.Text>
                     </Card.Body>
                   </Card>
                 )}

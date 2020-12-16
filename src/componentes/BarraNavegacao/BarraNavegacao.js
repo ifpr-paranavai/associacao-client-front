@@ -13,13 +13,13 @@ class BarraNavegacao extends Component{
             <Navbar.Brand href="#home">
               <img
                 src= {logo}
-                height="30"
+                height="50"
                 className="d-inline-block align-top"
                 alt="React Bootstrap logo"
               />
             </Navbar.Brand>
 
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Toggle aria-controls="basic-navbar-nav" className = "menu-branco"/>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
                 <Nav.Link href="/">INÍCIO</Nav.Link>

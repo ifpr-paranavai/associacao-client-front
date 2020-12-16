@@ -1,8 +1,8 @@
 
 import './estilo.css';
-import HomeService from '../../service/HomeService'
+// import HomeService from '../../service/HomeService'
 import React, { Component } from 'react';
-import { Form, Container, Row, FormControl, Col, Button } from 'react-bootstrap';
+import { Form, Container, Row, Col, Button } from 'react-bootstrap';
 
 
 // import {Navbar, Nav, Container} from 'react-bootstrap';

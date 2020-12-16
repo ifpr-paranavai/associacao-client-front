@@ -48,10 +48,10 @@ class Rodape extends Component{
            
             <Col xs = {12} md = {4} className = "text-sm-center text-md-left">
               <p className = "titulo-rodape">Contato</p>
-              <p><FontAwesomeIcon icon={faEnvelope} color="white" size="lg" className="mr-2"/>assoacao@gmail.com</p>           
+              <p><FontAwesomeIcon icon={faEnvelope} color="white" size="lg" className="mr-2"/>faleconosco.amaer@gmail.com</p>           
               <p><FontAwesomeIcon icon={faMapMarker} color="white" size="lg" className="mr-2"/>Maringá | PR</p>
-              <p><FontAwesomeIcon icon={faInstagramSquare} color="white" size="lg" className="mr-2"/>@amaer</p>
-              <p><FontAwesomeIcon icon={faFacebookSquare} color="white" size="lg" className="mr-2"/>@facebook</p>
+              <p><FontAwesomeIcon icon={faInstagramSquare} color="white" size="lg" className="mr-2"/><a className="cor-link" href="https://www.instagram.com/amaermga/">@amaer</a></p>
+              <p><FontAwesomeIcon icon={faFacebookSquare} color="white" size="lg" className="mr-2"/><a className="cor-link" href="https://www.facebook.com/amaermaringa/">@facebook</a></p>
               <a className="btn btn-outline-light text-center" href="/#menuopcoes" >Acima</a>
             </Col>
           </Row>
