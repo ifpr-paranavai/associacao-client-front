@@ -18,6 +18,12 @@ class BarraNavegacao extends Component{
                 alt="React Bootstrap logo"
               />
             </Navbar.Brand>
+            {/**
+              <Navbar.Brand href="#home" className="brand-font">
+                AMAER
+              </Navbar.Brand>
+            */}
+            
 
             <Navbar.Toggle aria-controls="basic-navbar-nav" className = "menu-branco"/>
             <Navbar.Collapse id="basic-navbar-nav">

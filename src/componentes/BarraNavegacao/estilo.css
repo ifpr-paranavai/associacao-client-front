@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+.brand-font{
+    font-family: 'Bangers', cursive;
+    font-size: 50px !important;
+}
+
 .nav-texto-branco * {
     color: white !important;
     

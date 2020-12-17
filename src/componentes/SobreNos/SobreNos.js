@@ -4,10 +4,6 @@ import React, { Component } from 'react';
 import HomeService from './../../service/HomeService'
 import { Container, Row, Col} from 'react-bootstrap';
 
-
-// import {Navbar, Nav, Container} from 'react-bootstrap';
-
-
 class SobreNos extends Component{
     constructor (props){
         super(props);

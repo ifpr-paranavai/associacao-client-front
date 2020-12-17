@@ -20,7 +20,8 @@ class HomeService{
                 // src: "https://i.ibb.co/8m90SxW/aviao3.png",
                 // src: "https://i.ibb.co/ChYxYNJ/aviao4.png",
                 src: "https://i.ibb.co/qnrRZKk/aviao2.png",
-                alt: "Não carregou"
+                //src: "https://i1.wp.com/www.amaer.com.br/wp-content/uploads/2018/05/cropped-logoamaerokpequeno.png?w=700&ssl=1",
+                alt: "Avião"
                 
                 // <a href="https://ibb.co/rQHm1pC"><img src="https://i.ibb.co/8m90SxW/aviao3.png" alt="aviao3" border="0" /></a>
             }
