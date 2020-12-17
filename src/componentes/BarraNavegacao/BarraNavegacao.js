@@ -25,7 +25,7 @@ class BarraNavegacao extends Component{
                 <Nav.Link href="/">INÍCIO</Nav.Link>
                 <Nav.Link href="/#sobre">SOBRE NÓS</Nav.Link>
                 <Nav.Link href="/eventos">EVENTOS</Nav.Link>
-                <Nav.Link href="/fotosevideos">FOTOS E VÍDEOS</Nav.Link>
+                <Nav.Link href="/fotosvideos">FOTOS E VÍDEOS</Nav.Link>
                 <Nav.Link href="/classificados">CLASSIFICADOS</Nav.Link>
                 <Nav.Link href="/#contato">CONTATO</Nav.Link>
                </Nav>
