@@ -2,7 +2,6 @@ import './estilo.css';
 import React, { Component} from 'react';
 import {Card, Row, Button, CardDeck, Container} from 'react-bootstrap';
 import FotosVideosService from '../../service/FotosVideosService'
-// import Eventos from './../../componentes/Eventos/Eventos';
 
 
 
@@ -15,14 +14,12 @@ class FotosVideos extends Component{
 
     }
   }
-  async componentDidMountFotos() {
+  async componentDidMount() {
       let fotos = await FotosVideosService.obterFotos();
       this.setState({ fotos })
-  }
-
-  async componentDidMountVideos() {
-    let videos = await FotosVideosService.obterVideos();
-    this.setState({ videos })
+ 
+      let videos = await FotosVideosService.obterVideos();
+      this.setState({ videos })
 }
    render(){
    
