@@ -2,7 +2,6 @@ import './estilo.css';
 import React, { Component} from 'react';
 import {Card, Row, Button, CardDeck, Container} from 'react-bootstrap';
 import FotosVideosService from '../../service/FotosVideosService'
-// import Eventos from './../../componentes/Eventos/Eventos';
 
 
 
@@ -15,14 +14,12 @@ class FotosVideos extends Component{
 
     }
   }
-  async componentDidMountFotos() {
+  async componentDidMount() {
       let fotos = await FotosVideosService.obterFotos();
       this.setState({ fotos })
-  }
-
-  async componentDidMountVideos() {
-    let videos = await FotosVideosService.obterVideos();
-    this.setState({ videos })
+ 
+      let videos = await FotosVideosService.obterVideos();
+      this.setState({ videos })
 }
    render(){
    
@@ -39,8 +36,8 @@ class FotosVideos extends Component{
               return (
                 <Card className = "col-6 col-lg-4 p-4 my-3 mx-4 borda-cards-eventos" key={foto.id}>
                   <Card.Img variant="top" 
-                    src= {foto.imagem.src }
-                    alt={foto.imagem.alt}
+                    src= {foto.src }
+                    alt={foto.alt}
                   />
                 </Card>
               )}
@@ -62,8 +59,8 @@ class FotosVideos extends Component{
               return (
                 <Card className = "col-6 col-lg-4 p-4 my-3 mx-4 borda-cards-eventos" key={video.id}>
                   <Card.Img variant="top" 
-                    src= {video.imagem.src }
-                    alt={video.imagem.alt}
+                    src= {video.src }
+                    alt={video.alt}
                   />
                 </Card>
               )}

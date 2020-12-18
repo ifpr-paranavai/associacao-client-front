@@ -5,7 +5,7 @@ class FotosVideos{
     
     static async obterFotos(){
         try{
-            const {data} = await Axios.get(`${Config.api}/fotosvideos`)
+            const {data} = await Axios.get(`${Config.api}/galeria/fotos`)
             return data
         }catch(error){
             console.log(error)
@@ -16,7 +16,7 @@ class FotosVideos{
 
     static async obterVideos(){
         try{
-            const {data} = await Axios.get(`${Config.api}/fotosvideos`)
+            const {data} = await Axios.get(`${Config.api}/galeria/videos`)
             return data
         }catch(error){
             console.log(error)
