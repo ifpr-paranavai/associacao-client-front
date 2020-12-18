@@ -1,6 +1,7 @@
 {
   "name": "front-associacao",
   "version": "0.1.0",
+  "proxy": "http://api.teste.com.br/v1",
   "engines": {
     "node": "12.18.4"
   },
