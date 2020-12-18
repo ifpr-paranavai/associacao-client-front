@@ -1,11 +1,12 @@
 
 import Axios from 'axios';
+import API from '../Api';
 import Config from '../uteis/configuracao';
 class HomeService{
     
     static async obterNoticias(){
         try{
-            const {data} = await Axios.get(`${Config.api}/noticias`)
+            const {data} = await API.get('/noticias')
             return data
         }catch(error){
             console.log(error)
