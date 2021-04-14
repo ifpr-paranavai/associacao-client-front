@@ -28,12 +28,13 @@ function Contato () {
   };
 
   const enviarMensagem = async (event) => {
-    setLoading(true);
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
+      setValidated(true);
     } else {
+      setLoading(true);
       try {
         await ContatoService.enviarMensagem(values);
         setMensagem(`Mensagem Enviada com Sucesso! Em breve retornaremos o seu contato.`);
@@ -41,13 +42,15 @@ function Contato () {
         setValues({
           nome: '', email: '', assunto: '', mensagem: ''
         });
+        setValidated(false);
       } catch (e) {
         setMensagem(`Falha ao enviar sua mensagem! ${e.message}`);
         handleShow();
+        setValidated(true);
       }
+      setLoading(false);
     }
-    setLoading(false);
-    setValidated(false);
+    
   }
   return (
     <Container>
