@@ -3,12 +3,21 @@ import './estilo.css';
 import ContatoService from '../../service/ContatoService';
 import * as FaIcons from 'react-icons/fa';
 import React, { useState } from 'react';
-import { Form, Container, Row, Col, Button } from 'react-bootstrap';
+import { Form, Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
 
 function Contato () {
   const [values, setValues] = useState({
     nome: '', email: '', assunto: '', mensagem: '' 
   });
+
+  const [show, setShow] = useState(false);
+  
+  const [loading, setLoading] = useState(false);
+
+  const [mensagem, setMensagem] = useState('');
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [validated, setValidated] = useState(false);
 
@@ -19,6 +28,7 @@ function Contato () {
   };
 
   const enviarMensagem = async (event) => {
+    setLoading(true);
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -26,15 +36,18 @@ function Contato () {
     } else {
       try {
         await ContatoService.enviarMensagem(values);
-        alert('Mensagem enviada com sucesso!');
+        setMensagem(`Mensagem Enviada com Sucesso! Em breve retornaremos o seu contato.`);
+        handleShow();
         setValues({
           nome: '', email: '', assunto: '', mensagem: ''
         });
       } catch (e) {
-        alert(`Falha ao enviar sua mensagem! ${e.message}`);
+        setMensagem(`Falha ao enviar sua mensagem! ${e.message}`);
+        handleShow();
       }
     }
-    setValidated(true);
+    setLoading(false);
+    setValidated(false);
   }
   return (
     <Container>
@@ -97,18 +110,28 @@ function Contato () {
               </Form.Control.Feedback>
             </Form.Group>
             <Button
-              className="px-5 mt-3 cor-botao"
+              className="mt-3 cor-botao"
               size="lg"
               variant="secondary"
               type="submit"
             >
+              {loading ? <Spinner animation="border" className="mr-3" /> : ''}
               Enviar <FaIcons.FaRegPaperPlane className="ml-3"/>
             </Button>
           </Col>
         </Row>
-
-        </Form>
-        
+      </Form>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title><FaIcons.FaExclamationTriangle /></Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{ mensagem }</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Fechar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>         
   )
 }

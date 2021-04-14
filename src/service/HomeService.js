@@ -1,7 +1,4 @@
-
-import Axios from 'axios';
 import API from '../Api';
-import Config from '../uteis/configuracao';
 class HomeService{
     
     static async obterNoticias(){
