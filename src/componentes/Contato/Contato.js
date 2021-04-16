@@ -5,7 +5,7 @@ import * as FaIcons from 'react-icons/fa';
 import React, { useState } from 'react';
 import { Form, Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
 
-function Contato () {
+function Contato (props) {
   const [values, setValues] = useState({
     nome: '', email: '', assunto: '', mensagem: '' 
   });
@@ -56,7 +56,7 @@ function Contato () {
     <Container>
         <Row className="justify-content-center mb-5"> 
           <h1 className="my-3">
-            Contato
+            { props.titulo }
           </h1>
         </Row>
         <Form className = "p-5 mb-4 mx-5 formulario-contato" noValidate validated={validated} onSubmit={enviarMensagem}>
