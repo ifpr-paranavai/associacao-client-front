@@ -1,0 +1,19 @@
+.image-size {
+  width: 82px;
+  height: 82px;
+  border-radius: 4px;
+}
+.remove-button {
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  width: 22px;
+  height: 22px;
+  color: white;
+  cursor: pointer;
+  background: rgb(221, 12, 12);
+  border-radius: 100%;
+}
+.remove-button:hover {
+  background: rgb(114, 11, 11);
+}

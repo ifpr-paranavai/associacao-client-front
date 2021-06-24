@@ -19,6 +19,7 @@
     "bootstrap": "^4.5.3",
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
+    "md5": "^2.3.0",
     "path": "^0.12.7",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",

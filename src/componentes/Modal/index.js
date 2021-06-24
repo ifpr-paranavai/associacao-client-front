@@ -1,9 +1,7 @@
-
-import './estilo.css';
-import React, {useState, useEffect} from 'react';
-import {Modal, Button} from 'react-bootstrap';
-import AssociarService from '../../service/AssociarService'
-
+import "./estilo.css";
+import React, { useState, useEffect } from "react";
+import { Modal, Button } from "react-bootstrap";
+import ServicoAssociado from "../../service/ServicoAssociado";
 
 export default function ModalAssociar() {
   const [show, setShow] = useState(true);
@@ -13,18 +11,16 @@ export default function ModalAssociar() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-   useEffect (() => {
+  useEffect(() => {
     // Atualiza o titulo do documento usando a API do browser
     const fetchData = async () => {
-      
-      const {titulo, corpo} = await AssociarService.buscarTextoModal();
+      const { titulo, corpo } = await ServicoAssociado.buscarTextoModal();
       console.log(titulo);
       setTitulo(titulo);
       setCorpo(corpo);
-    
-    }
+    };
     fetchData();
-  },[]);
+  }, []);
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -35,8 +31,7 @@ export default function ModalAssociar() {
         <Modal.Header closeButton>
           <Modal.Title>{titulo}</Modal.Title>
         </Modal.Header>
-        <Modal.Body dangerouslySetInnerHTML={{__html:corpo}}>
-        </Modal.Body>
+        <Modal.Body dangerouslySetInnerHTML={{ __html: corpo }}></Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Fechar
