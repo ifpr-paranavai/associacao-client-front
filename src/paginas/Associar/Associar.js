@@ -1,9 +1,8 @@
 import "./estilo.css";
-import React, { useState, useRef } from "react";
-// import ServicoAssociado from "../../service/ServicoAssociado";
+import React, { useEffect, useState, useRef } from "react";
+//import ServicoAssociado from "../../service/ServicoAssociado";
 import { buscaCEP } from "../../service/ServicoCEP";
 import { Form, Container, Row, Col, Button, Card, Alert } from "react-bootstrap";
-import FloatingLabel from "react-bootstrap-floating-label";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ImageUploader from "../../componentes/ImageUploader/ImageUploader";
 import { faUser, faHome, faPhoneAlt, faCar, faPlane } from "@fortawesome/free-solid-svg-icons";
@@ -121,10 +120,41 @@ export default function Associar(props) {
     setAlerta(true);
   }
 
-  async function buscarEndereco() {
-    const unmaskedCEP = removeMask(endereco.cep);
+  useEffect(() => {
+    async function findAddress(unmaskedCEP) {
+      try {
+        setBuscando(true);
+        const address = await buscaCEP(unmaskedCEP);
 
-    if (unmaskedCEP?.length !== 8) {
+        setEndereco({
+          ...endereco,
+          estado: address.state,
+          cidade: address.city,
+          bairro: address.neighborhood,
+          rua: address.street,
+        });
+
+        setTimeout(() => {
+          numberRef.current?.focus();
+        }, 120);
+      } catch (error) {
+        console.log("deveria alertar");
+        mostrarAlerta("error", "CEP inválido!");
+        setEndereco({
+          cep: "",
+          estado: "",
+          cidade: "",
+          bairro: "",
+          rua: "",
+          numero: "",
+        });
+      } finally {
+        setBuscando(false);
+      }
+    }
+    const cep = removeMask(endereco.cep);
+
+    if (cep?.length !== 8) {
       setEndereco({
         ...endereco,
         estado: "",
@@ -136,36 +166,9 @@ export default function Associar(props) {
       return;
     }
 
-    try {
-      setBuscando(true);
-      const address = await buscaCEP(unmaskedCEP);
-
-      setEndereco({
-        ...endereco,
-        estado: address.state,
-        cidade: address.city,
-        bairro: address.neighborhood,
-        rua: address.street,
-      });
-
-      setTimeout(() => {
-        numberRef.current?.focus();
-      }, 120);
-    } catch (error) {
-      console.log("deveria alertar");
-      mostrarAlerta("error", "CEP inválido!");
-      setEndereco({
-        cep: "",
-        estado: "",
-        cidade: "",
-        bairro: "",
-        rua: "",
-        numero: "",
-      });
-    } finally {
-      setBuscando(false);
-    }
-  }
+    findAddress(cep);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [endereco.cep]);
 
   return (
     <Container className="mt-5 pt-5 ">
@@ -224,15 +227,13 @@ export default function Associar(props) {
             </Form.Row>
             <Form.Row>
               <Form.Group as={Col} controlId="nome">
-                <FloatingLabel controlId="floatingNome" label="Nome">
-                  <Form.Control
-                    placeholder="Nome"
-                    value={nome}
-                    size="lg"
-                    required
-                    onChange={(event) => setNome(event.target.value)}
-                  />
-                </FloatingLabel>
+                <Form.Control
+                  placeholder="Nome"
+                  value={nome}
+                  size="lg"
+                  required
+                  onChange={(event) => setNome(event.target.value)}
+                />
               </Form.Group>
             </Form.Row>
             <Form.Row>
@@ -300,7 +301,7 @@ export default function Associar(props) {
               <Form.Group className="col-sm-12 col-md-6" controlId="whatsapp" as={Col}>
                 <Form.Check
                   className="tamanho-texto ml-3 mt-2"
-                  type="checkbox"
+                  type="switch"
                   checked={tel_celular.whatsapp}
                   label="Celular com WhatsApp?"
                   onChange={() => setCelular({ ...tel_celular, whatsapp: !tel_celular.whatsapp })}
@@ -366,7 +367,7 @@ export default function Associar(props) {
                   mask="11111-111"
                   maskChar={null}
                   required
-                  onChange={buscarEndereco()}
+                  onChange={(event) => setEndereco({ ...endereco, cep: event.target.value })}
                 />
               </Form.Group>
               <Form.Group className="col-sm-12 col-md-8" as={Col} controlId="rua">
@@ -422,13 +423,14 @@ export default function Associar(props) {
               </Form.Group>
             </Form.Row>
             <Form.Row>
+              {console.log(receber_comunicado)}
               <Form.Check
                 checked={receber_comunicado}
                 className="tamanho-texto my-3 ml-2"
                 type="checkbox"
                 size="lg"
-                label="Aceito receber comunicados oficiais oriundos da diretoria da Amaer"
-                onChange={(event) => setReceberComunicado(event.target.checked)}
+                label="Aceito receber comunicados oficiais oriundos da diretoria."
+                onChange={() => setReceberComunicado(!receber_comunicado)}
               />
             </Form.Row>
             <Form.Row className="justify-content-center mt-3">
