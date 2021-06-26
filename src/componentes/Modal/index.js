@@ -15,7 +15,6 @@ export default function ModalAssociar() {
     // Atualiza o titulo do documento usando a API do browser
     const fetchData = async () => {
       const { titulo, corpo } = await ServicoAssociado.buscarTextoModal();
-      console.log(titulo);
       setTitulo(titulo);
       setCorpo(corpo);
     };

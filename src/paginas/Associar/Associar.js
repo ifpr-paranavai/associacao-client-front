@@ -1,24 +1,25 @@
 import "./estilo.css";
-import React, { useEffect, useState, useRef } from "react";
-import ServicoAssociado from "../../service/ServicoAssociado";
+import React, { useState, useRef } from "react";
+// import ServicoAssociado from "../../service/ServicoAssociado";
 import { buscaCEP } from "../../service/ServicoCEP";
-import { Form, Container, Row, Col, Button, Card } from "react-bootstrap";
+import { Form, Container, Row, Col, Button, Card, Alert } from "react-bootstrap";
+import FloatingLabel from "react-bootstrap-floating-label";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ImageUploader from "../../componentes/ImageUploader/ImageUploader";
-import { faUser, faHome, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faHome, faPhoneAlt, faCar, faPlane } from "@fortawesome/free-solid-svg-icons";
 import MaskedFormControl from "../../componentes/MaskedFormControl/MaskedFormControl";
-import estados from "../../uteis/estados";
-import { useNotify } from "../../contextos/Notificacao";
 import ModalAssociar from "../../componentes/Modal";
 import { removeMask } from "../../uteis/string";
 import md5 from "md5";
 
 export default function Associar(props) {
   //const isMobile = useMediaQuery("(max-width:600px)");
-  const notify = useNotify();
   const numberRef = useRef(null);
   const [salvando, setSalvando] = useState(false);
   const [buscando, setBuscando] = useState(false);
+  const [alerta, setAlerta] = useState(false);
+  const [mensagem, setMensagem] = useState("");
+  const [tipoAlerta, setTipoAlerta] = useState("error");
 
   const [imagem, setImagem] = useState({ src: "", alt: "" });
   const [nome, setNome] = useState(""); // salvar sobrenome separado
@@ -26,6 +27,9 @@ export default function Associar(props) {
   const [data_nascimento, setDataNascimento] = useState(null);
   const [cpf, setCPF] = useState("");
   const [rg, setRG] = useState("");
+  const [tel_residencial, setTelResidencial] = useState("");
+  const [tel_comercial, setTelComercial] = useState("");
+  const [receber_comunicado, setReceberComunicado] = useState(true);
   const [email, setEmail] = useState("");
   const [email_alternativo, setEmailAlternativo] = useState("");
   const [modalidade, setModalidade] = useState("aeromodelismo");
@@ -51,6 +55,9 @@ export default function Associar(props) {
         rg,
         cpf,
         email,
+        tel_residencial,
+        tel_comercial,
+        receber_comunicado,
         email_alternativo,
         modalidade,
         perfil: "ASSOCIADO",
@@ -61,13 +68,13 @@ export default function Associar(props) {
 
       //await ServicoAssociado.cadastrarAssociado(data);
       console.log(data);
-      notify.showSuccess("Associado salvo com sucesso!");
+      //notify.showSuccess("Associado salvo com sucesso!");
       setTimeout(() => {
         props.onSave();
       }, 60);
       limparState();
     } catch (error) {
-      notify.showError(error.response.data);
+      //notify.showError(error.response.data);
     } finally {
       setSalvando(false);
     }
@@ -84,6 +91,9 @@ export default function Associar(props) {
     setEmailAlternativo("");
     setModalidade("aeromodelismo");
     setSenha("");
+    setTelComercial("");
+    setTelResidencial("");
+    setReceberComunicado(true);
     setCelular({ numero: "", whatsapp: false });
     setEndereco({
       cep: "",
@@ -95,10 +105,39 @@ export default function Associar(props) {
     });
   }
 
-  async function findAddress() {
+  function fecharAlerta() {
+    setAlerta(false);
+    setTimeout(() => {
+      setMensagem("");
+      setTipoAlerta("error");
+    }, 100);
+  }
+
+  function mostrarAlerta(tipo, mensagem) {
+    setTimeout(() => {
+      setMensagem(mensagem);
+      setTipoAlerta(tipo);
+    }, 100);
+    setAlerta(true);
+  }
+
+  async function buscarEndereco() {
+    const unmaskedCEP = removeMask(endereco.cep);
+
+    if (unmaskedCEP?.length !== 8) {
+      setEndereco({
+        ...endereco,
+        estado: "",
+        cidade: "",
+        bairro: "",
+        rua: "",
+        numero: "",
+      });
+      return;
+    }
+
     try {
       setBuscando(true);
-      const unmaskedCEP = removeMask(endereco.cep);
       const address = await buscaCEP(unmaskedCEP);
 
       setEndereco({
@@ -113,24 +152,29 @@ export default function Associar(props) {
         numberRef.current?.focus();
       }, 120);
     } catch (error) {
-      notify.showError(error.response.data);
+      console.log("deveria alertar");
+      mostrarAlerta("error", "CEP inválido!");
+      setEndereco({
+        cep: "",
+        estado: "",
+        cidade: "",
+        bairro: "",
+        rua: "",
+        numero: "",
+      });
     } finally {
       setBuscando(false);
     }
   }
 
-  useEffect(() => {
-    console.log(endereco.cep);
-    if (!endereco.cep || endereco.cep.length < 9) {
-      return;
-    }
-    findAddress();
-  }, [endereco.cep]);
-
   return (
     <Container className="mt-5 pt-5 ">
-      <ModalAssociar></ModalAssociar>
+      <Alert show={alerta} variant={tipoAlerta} onClose={fecharAlerta} dismissible>
+        <Alert.Heading>Mensagem!</Alert.Heading>
+        <p>{mensagem}</p>
+      </Alert>
       <Card className="efeito-card-form px-5 my-5">
+        <ModalAssociar></ModalAssociar>
         <Row className="justify-content-center mb-5 mx-5">
           <h1 className="my-3">Associe-se</h1>
         </Row>
@@ -147,19 +191,48 @@ export default function Associar(props) {
             </Form.Row>
             <Form.Row>
               <h3 className="py-3">
+                <FontAwesomeIcon color="blue" icon={faPlane} size="1x" className="mr-2" />
+                <FontAwesomeIcon color="blue" icon={faCar} size="1x" className="mr-2" />
+                Modalidade Principal
+              </h3>
+            </Form.Row>
+            <Form.Row>
+              <Form.Check
+                className="tamanho-texto mt-2 mx-4"
+                type="radio"
+                name="modalidade"
+                checked={modalidade === "aeromodelismo"}
+                label="Aeromodelismo"
+                value="aeromodelismo"
+                onChange={(event) => setModalidade(event.target.value)}
+              />
+              <Form.Check
+                className="tamanho-texto mt-2 mx-4"
+                type="radio"
+                checked={modalidade === "automodelismo"}
+                name="modalidade"
+                label="Automodelismo"
+                value="automodelismo"
+                onChange={(event) => setModalidade(event.target.value)}
+              />
+            </Form.Row>
+            <Form.Row>
+              <h3 className="py-3">
                 <FontAwesomeIcon color="blue" icon={faUser} size="1x" className="mr-2" />
                 Dados do usuário
               </h3>
             </Form.Row>
             <Form.Row>
               <Form.Group as={Col} controlId="nome">
-                <Form.Control
-                  placeholder="Nome"
-                  value={nome}
-                  size="lg"
-                  required
-                  onChange={(event) => setNome(event.target.value)}
-                />
+                <FloatingLabel controlId="floatingNome" label="Nome">
+                  <Form.Control
+                    placeholder="Nome"
+                    value={nome}
+                    size="lg"
+                    required
+                    onChange={(event) => setNome(event.target.value)}
+                  />
+                </FloatingLabel>
               </Form.Group>
             </Form.Row>
             <Form.Row>
@@ -210,7 +283,7 @@ export default function Associar(props) {
 
             <Form.Row>
               <h3 className="py-3">
-                <FontAwesomeIcon icon={faPhoneAlt} size="1x" className="mr-2" />
+                <FontAwesomeIcon color="blue" icon={faPhoneAlt} size="1x" className="mr-2" />
                 Contato
               </h3>
             </Form.Row>
@@ -239,7 +312,8 @@ export default function Associar(props) {
                 <MaskedFormControl
                   mask="(11) 1111-1111"
                   placeholder="Telefone Residencial"
-                  name="tel_residencial"
+                  value={tel_residencial}
+                  onChange={(event) => setTelResidencial(event.target.value)}
                   size="lg"
                 />
               </Form.Group>
@@ -247,14 +321,22 @@ export default function Associar(props) {
                 <MaskedFormControl
                   mask="(11) 1111-1111"
                   placeholder="Telefone Comercial"
-                  name="tel_comercial"
+                  value={tel_comercial}
+                  onChange={(event) => setTelComercial(event.target.value)}
                   size="lg"
                 />
               </Form.Group>
             </Form.Row>
             <Form.Row>
               <Form.Group as={Col} controlId="email">
-                <Form.Control placeholder="E-mail" type="email" name="email" size="lg" />
+                <Form.Control
+                  placeholder="E-mail"
+                  type="email"
+                  value={email}
+                  size="lg"
+                  required
+                  onChange={(event) => setEmail(event.target.value)}
+                />
               </Form.Group>
             </Form.Row>
             <Form.Row>
@@ -264,47 +346,13 @@ export default function Associar(props) {
                   type="email"
                   name="email_alternativo"
                   size="lg"
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </Form.Group>
             </Form.Row>
             <Form.Row>
-              <Form.Label column="lg" className="tamanho-texto">
-                Modalidade Principal:
-              </Form.Label>
-              <Col>
-                <Form.Check
-                  className="tamanho-texto mt-2 mx-4"
-                  type="radio"
-                  name="modalidade"
-                  checked={modalidade === "aeromodelismo"}
-                  label="Aeromodelismo"
-                  value="aeromodelismo"
-                  onChange={(event) => setModalidade(event.target.value)}
-                />
-              </Col>
-              <Col>
-                <Form.Check
-                  className="tamanho-texto mt-2 mx-4"
-                  type="radio"
-                  checked={modalidade === "automodelismo"}
-                  name="modalidade"
-                  label="Automodelismo"
-                  value="automodelismo"
-                  onChange={(event) => setModalidade(event.target.value)}
-                />
-              </Col>
-            </Form.Row>
-            <Form.Row>
-              <Form.Check
-                name="receber_comunicado"
-                className="tamanho-texto my-3 ml-2"
-                type="checkbox"
-                label="Aceito receber comunicados oficiais oriundos da diretoria da Amaer"
-              />
-            </Form.Row>
-            <Form.Row>
               <h3 className="py-3">
-                <FontAwesomeIcon icon={faHome} size="1x" className="mr-2" />
+                <FontAwesomeIcon color="blue" icon={faHome} size="1x" className="mr-2" />
                 Endereço
               </h3>
             </Form.Row>
@@ -318,17 +366,15 @@ export default function Associar(props) {
                   mask="11111-111"
                   maskChar={null}
                   required
-                  onChange={(event) => setEndereco({ ...endereco, cep: event.target.value })}
+                  onChange={buscarEndereco()}
                 />
               </Form.Group>
-            </Form.Row>
-            <Form.Row>
               <Form.Group className="col-sm-12 col-md-8" as={Col} controlId="rua">
                 <Form.Control
                   placeholder="Rua"
-                  label="Rua"
+                  value={endereco.rua}
                   required
-                  disabled={buscando}
+                  disabled={buscando || removeMask(endereco.cep).length !== 8}
                   size="lg"
                   onChange={(event) => setEndereco({ ...endereco, rua: event.target.value })}
                 />
@@ -338,9 +384,19 @@ export default function Associar(props) {
                   placeholder="Número"
                   value={endereco.numero}
                   required
-                  disabled={buscando}
+                  disabled={buscando || removeMask(endereco.cep).length !== 8}
                   size="lg"
                   onChange={(event) => setEndereco({ ...endereco, numero: event.target.value })}
+                />
+              </Form.Group>
+              <Form.Group className="col-sm-12 col-md-8" as={Col} controlId="rua">
+                <Form.Control
+                  placeholder="Bairro"
+                  value={endereco.bairro}
+                  required
+                  disabled={buscando || removeMask(endereco.cep).length !== 8}
+                  size="lg"
+                  onChange={(event) => setEndereco({ ...endereco, bairro: event.target.value })}
                 />
               </Form.Group>
             </Form.Row>
@@ -348,31 +404,38 @@ export default function Associar(props) {
               <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="estado">
                 <Form.Control
                   placeholder="Estado"
-                  as="select"
-                  name="estado"
+                  value={endereco.estado}
+                  required
+                  disabled={buscando || !endereco.cep?.length !== 8}
                   size="lg"
-                  defaultValue="PR"
-                >
-                  {estados.map((estado) => {
-                    return (
-                      <option label={estado.nome} value={estado.sigla} key={estado.sigla}></option>
-                    );
-                  })}
-                </Form.Control>
+                  onChange={(event) => setEndereco({ ...endereco, estado: event.target.value })}
+                />
               </Form.Group>
               <Form.Group className="col-sm-12 col-md-6" controlId="cidade" as={Col}>
                 <Form.Control
                   placeholder="Cidade"
-                  as="select"
-                  name="cidade"
+                  value={endereco.cidade}
+                  disabled={buscando || !endereco.cep?.length !== 8}
                   size="lg"
-                  defaultValue="Maringá"
+                  onChange={(event) => setEndereco({ ...endereco, cidade: event.target.value })}
                 ></Form.Control>
               </Form.Group>
             </Form.Row>
-
+            <Form.Row>
+              <Form.Check
+                checked={receber_comunicado}
+                className="tamanho-texto my-3 ml-2"
+                type="checkbox"
+                size="lg"
+                label="Aceito receber comunicados oficiais oriundos da diretoria da Amaer"
+                onChange={(event) => setReceberComunicado(event.target.checked)}
+              />
+            </Form.Row>
             <Form.Row className="justify-content-center mt-3">
-              <Button size="lg" variant="secondary" type="submit">
+              <Button size="lg" variant="danger" className="mr-1" onClick={limparState}>
+                Cancelar
+              </Button>
+              <Button size="lg" variant="success" className="ml-1" type="submit">
                 Enviar
               </Button>
             </Form.Row>
