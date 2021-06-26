@@ -12,28 +12,38 @@ import { removeMask } from "../../uteis/string";
 import md5 from "md5";
 
 export default function Associar(props) {
-  //const isMobile = useMediaQuery("(max-width:600px)");
   const numberRef = useRef(null);
   const [salvando, setSalvando] = useState(false);
   const [buscando, setBuscando] = useState(false);
   const [alerta, setAlerta] = useState(false);
   const [mensagem, setMensagem] = useState("");
   const [tipoAlerta, setTipoAlerta] = useState("error");
+  const [validated, setValidated] = useState(false);
 
-  const [imagem, setImagem] = useState({ src: "", alt: "" });
-  const [nome, setNome] = useState(""); // salvar sobrenome separado
-  const [sobrenome, setSobrenome] = useState(""); // salvar sobrenome separado
-  const [data_nascimento, setDataNascimento] = useState(null);
-  const [cpf, setCPF] = useState("");
-  const [rg, setRG] = useState("");
-  const [tel_residencial, setTelResidencial] = useState("");
-  const [tel_comercial, setTelComercial] = useState("");
-  const [receber_comunicado, setReceberComunicado] = useState(true);
-  const [email, setEmail] = useState("");
-  const [email_alternativo, setEmailAlternativo] = useState("");
-  const [modalidade, setModalidade] = useState("aeromodelismo");
-  const [senha, setSenha] = useState("");
+  const [associado, setAssociado] = useState({
+    nome: "",
+    sobrenome: "",
+    data_nascimento: null,
+    rg: "",
+    cpf: "",
+    email: "",
+    tel_residencial: "",
+    tel_comercial: "",
+    email_alternativo: "",
+    modalidade: "aeromodelismo",
+    perfil: "ASSOCIADO",
+    senha: "",
+  });
+
+  const set = (atributo) => {
+    return ({ target: { value } }) => {
+      setAssociado((valoresAntigos) => ({ ...valoresAntigos, [atributo]: value }));
+    };
+  };
+
   const [tel_celular, setCelular] = useState({ numero: "", whatsapp: false });
+  const [receber_comunicado, setReceberComunicado] = useState(true);
+  const [imagem, setImagem] = useState({ src: "", alt: "" });
   const [endereco, setEndereco] = useState({
     cep: "",
     estado: "",
@@ -42,58 +52,45 @@ export default function Associar(props) {
     bairro: "",
     numero: "",
   });
-  async function salvarAssociado(event) {
-    event.preventDefault();
-    try {
-      setSalvando(true);
-      const data = {
-        imagem,
-        nome,
-        sobrenome,
-        data_nascimento,
-        rg,
-        cpf,
-        email,
-        tel_residencial,
-        tel_comercial,
-        receber_comunicado,
-        email_alternativo,
-        modalidade,
-        perfil: "ASSOCIADO",
-        senha: md5(senha),
-        tel_celular,
-        endereco,
-      };
 
-      //await ServicoAssociado.cadastrarAssociado(data);
-      console.log(data);
-      //notify.showSuccess("Associado salvo com sucesso!");
-      setTimeout(() => {
-        props.onSave();
-      }, 60);
-      limparState();
-    } catch (error) {
-      //notify.showError(error.response.data);
-    } finally {
-      setSalvando(false);
+  const salvarAssociado = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+      setValidated(true);
+    } else {
+      try {
+        setSalvando(true);
+        const data = {
+          ...associado,
+          senha: md5(associado.senha),
+          imagem,
+          endereco,
+          receber_comunicado,
+          tel_celular,
+        };
+
+        //await ServicoAssociado.cadastrarAssociado(data);
+        console.log(data);
+        mostrarAlerta(
+          "error",
+          `Registro realizado com sucesso! Você receberá um e-mail de confirmação quando seus dados forem validados pela administração.`
+        );
+
+        limparState();
+        setValidated(false);
+      } catch (error) {
+        mostrarAlerta("error", `Falha ao enviar sua mensagem! ${error.message}`);
+      } finally {
+        setSalvando(false);
+        setValidated(true);
+      }
     }
-  }
+  };
 
   function limparState() {
     setImagem({ src: "", alt: "" });
-    setNome("");
-    setSobrenome("");
-    setDataNascimento(null);
-    setCPF("");
-    setRG("");
-    setEmail("");
-    setEmailAlternativo("");
-    setModalidade("aeromodelismo");
-    setSenha("");
-    setTelComercial("");
-    setTelResidencial("");
-    setReceberComunicado(true);
-    setCelular({ numero: "", whatsapp: false });
     setEndereco({
       cep: "",
       estado: "",
@@ -102,6 +99,24 @@ export default function Associar(props) {
       bairro: "",
       numero: "",
     });
+    setReceberComunicado(true);
+    setAssociado({
+      nome: "",
+      sobrenome: "",
+      data_nascimento: null,
+      rg: "",
+      cpf: "",
+      email: "",
+      tel_residencial: "",
+      tel_comercial: "",
+      receber_comunicado: true,
+      email_alternativo: "",
+      modalidade: "aeromodelismo",
+      perfil: "ASSOCIADO",
+      senha: "",
+      tel_celular: "",
+    });
+    setCelular({ numero: "", whatsapp: false });
   }
 
   function fecharAlerta() {
@@ -138,7 +153,6 @@ export default function Associar(props) {
           numberRef.current?.focus();
         }, 120);
       } catch (error) {
-        console.log("deveria alertar");
         mostrarAlerta("error", "CEP inválido!");
         setEndereco({
           cep: "",
@@ -176,13 +190,19 @@ export default function Associar(props) {
         <Alert.Heading>Mensagem!</Alert.Heading>
         <p>{mensagem}</p>
       </Alert>
-      <Card className="efeito-card-form px-5 my-5">
+      <Card className="efeito-card-form px-3 my-5">
         <ModalAssociar></ModalAssociar>
         <Row className="justify-content-center mb-5 mx-5">
           <h1 className="my-3">Associe-se</h1>
         </Row>
+        {console.log(associado)}
         <Row className="justify-content-center mb-5 mx-5">
-          <Form className="formulario-contato" onSubmit={(event) => salvarAssociado(event)}>
+          <Form
+            className="formulario-cadastro"
+            noValidate
+            validated={validated}
+            onSubmit={salvarAssociado}
+          >
             <Form.Row>
               <Form.Group as={Col} controlId="imagem">
                 <ImageUploader
@@ -204,19 +224,19 @@ export default function Associar(props) {
                 className="tamanho-texto mt-2 mx-4"
                 type="radio"
                 name="modalidade"
-                checked={modalidade === "aeromodelismo"}
+                checked={associado.modalidade === "aeromodelismo"}
                 label="Aeromodelismo"
                 value="aeromodelismo"
-                onChange={(event) => setModalidade(event.target.value)}
+                onChange={set("modalidade")}
               />
               <Form.Check
                 className="tamanho-texto mt-2 mx-4"
                 type="radio"
-                checked={modalidade === "automodelismo"}
+                checked={associado.modalidade === "automodelismo"}
                 name="modalidade"
                 label="Automodelismo"
                 value="automodelismo"
-                onChange={(event) => setModalidade(event.target.value)}
+                onChange={set("modalidade")}
               />
             </Form.Row>
             <Form.Row>
@@ -226,59 +246,72 @@ export default function Associar(props) {
               </h3>
             </Form.Row>
             <Form.Row>
-              <Form.Group as={Col} controlId="nome">
+              <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="nome">
                 <Form.Control
-                  placeholder="Nome"
-                  value={nome}
+                  placeholder="Nome *"
                   size="lg"
                   required
-                  onChange={(event) => setNome(event.target.value)}
+                  value={associado.nome}
+                  onChange={set("nome")}
                 />
+                <Form.Control.Feedback type="invalid">
+                  O campo nome é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
-            </Form.Row>
-            <Form.Row>
-              <Form.Group as={Col} controlId="sobrenome">
+              <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="sobrenome">
                 <Form.Control
-                  placeholder="Sobrenome"
-                  value={sobrenome}
+                  placeholder="Sobrenome *"
                   size="lg"
                   required
-                  onChange={(event) => setSobrenome(event.target.value)}
+                  value={associado.sobrenome}
+                  onChange={set("sobrenome")}
                 />
+                <Form.Control.Feedback type="invalid">
+                  O campo sobrenome é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
             <Form.Row>
               <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="dataNasc">
                 <Form.Control
                   type="date"
-                  placeholder="Data de Nascimento"
-                  value={data_nascimento}
+                  placeholder="Data de Nascimento *"
                   size="lg"
                   required
-                  onChange={(value) => setDataNascimento(value)}
+                  value={associado.data_nascimento}
+                  onChange={set("data_nascimento")}
                 />
+                <Form.Control.Feedback type="invalid">
+                  O campo data de nascimento é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="col-sm-12 col-md-6" controlId="" as={Col}>
                 <MaskedFormControl
-                  placeholder="CPF"
-                  value={cpf}
+                  placeholder="CPF *"
                   size="lg"
                   mask="111.111.111-11"
                   required
                   maskChar={null}
-                  onChange={(event) => setCPF(event.target.value)}
+                  value={associado.cpf}
+                  onChange={set("cpf")}
                 />
+                <Form.Control.Feedback type="invalid">
+                  O campo CPF é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
             <Form.Row>
               <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="rg">
                 <Form.Control
-                  placeholder="RG"
-                  value={rg}
+                  placeholder="RG *"
                   size="lg"
                   required
-                  onChange={(event) => setRG(event.target.value)}
+                  value={associado.rg}
+                  onChange={set("rg")}
                 />
+                <Form.Control.Feedback type="invalid">
+                  O campo RG é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
 
@@ -292,11 +325,15 @@ export default function Associar(props) {
               <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="telcel">
                 <MaskedFormControl
                   mask="(11) 1 1111-1111"
-                  placeholder="Telefone Celular"
+                  placeholder="Telefone Celular *"
                   value={tel_celular.numero}
                   size="lg"
+                  required
                   onChange={(event) => setCelular({ ...tel_celular, numero: event.target.value })}
                 />
+                <Form.Control.Feedback type="invalid">
+                  O campo telefone celular é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="col-sm-12 col-md-6" controlId="whatsapp" as={Col}>
                 <Form.Check
@@ -313,42 +350,59 @@ export default function Associar(props) {
                 <MaskedFormControl
                   mask="(11) 1111-1111"
                   placeholder="Telefone Residencial"
-                  value={tel_residencial}
-                  onChange={(event) => setTelResidencial(event.target.value)}
                   size="lg"
+                  value={associado.tel_residencial}
+                  onChange={set("tel_residencial")}
                 />
               </Form.Group>
               <Form.Group className="col-sm-12 col-md-6" controlId="telcom" as={Col}>
                 <MaskedFormControl
                   mask="(11) 1111-1111"
                   placeholder="Telefone Comercial"
-                  value={tel_comercial}
-                  onChange={(event) => setTelComercial(event.target.value)}
                   size="lg"
+                  value={associado.tel_comercial}
+                  onChange={set("tel_comercial")}
                 />
               </Form.Group>
             </Form.Row>
             <Form.Row>
-              <Form.Group as={Col} controlId="email">
+              <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="email">
                 <Form.Control
-                  placeholder="E-mail"
+                  placeholder="E-mail *"
                   type="email"
-                  value={email}
                   size="lg"
                   required
-                  onChange={(event) => setEmail(event.target.value)}
+                  value={associado.email}
+                  onChange={set("email")}
                 />
+                <Form.Control.Feedback type="invalid">
+                  O campo e-mail é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
-            </Form.Row>
-            <Form.Row>
-              <Form.Group controlId="emailalter" as={Col}>
+              <Form.Group className="col-sm-12 col-md-6" controlId="emailalter" as={Col}>
                 <Form.Control
                   placeholder="E-mal alternativo"
                   type="email"
-                  name="email_alternativo"
                   size="lg"
-                  onChange={(event) => setEmail(event.target.value)}
+                  value={associado.email_alternativo}
+                  onChange={set("email_alternativo")}
                 />
+              </Form.Group>
+            </Form.Row>
+
+            <Form.Row>
+              <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="senha">
+                <Form.Control
+                  placeholder="Senha*"
+                  type="password"
+                  size="lg"
+                  required
+                  value={associado.senha}
+                  onChange={set("senha")}
+                />
+                <Form.Control.Feedback type="invalid">
+                  O campo senha é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
             <Form.Row>
@@ -360,78 +414,97 @@ export default function Associar(props) {
             <Form.Row>
               <Form.Group className="col-sm-12 col-md-4" controlId="cep" as={Col}>
                 <MaskedFormControl
-                  placeholder="CEP"
+                  placeholder="CEP *"
                   value={endereco.cep}
                   disabled={buscando}
                   size="lg"
                   mask="11111-111"
-                  maskChar={null}
                   required
                   onChange={(event) => setEndereco({ ...endereco, cep: event.target.value })}
                 />
+                <Form.Control.Feedback type="invalid">
+                  O campo CEP é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="col-sm-12 col-md-8" as={Col} controlId="rua">
                 <Form.Control
-                  placeholder="Rua"
+                  placeholder="Logradouro *"
                   value={endereco.rua}
                   required
                   disabled={buscando || removeMask(endereco.cep).length !== 8}
                   size="lg"
                   onChange={(event) => setEndereco({ ...endereco, rua: event.target.value })}
                 />
+                <Form.Control.Feedback type="invalid">
+                  O campo logradouro é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="col-sm-12 col-md-4" controlId="numero" as={Col}>
                 <Form.Control
-                  placeholder="Número"
+                  placeholder="Número *"
                   value={endereco.numero}
                   required
                   disabled={buscando || removeMask(endereco.cep).length !== 8}
                   size="lg"
                   onChange={(event) => setEndereco({ ...endereco, numero: event.target.value })}
                 />
+                <Form.Control.Feedback type="invalid">
+                  O campo número é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group className="col-sm-12 col-md-8" as={Col} controlId="rua">
+              <Form.Group className="col-sm-12 col-md-8" as={Col} controlId="bairro">
                 <Form.Control
-                  placeholder="Bairro"
+                  placeholder="Bairro *"
                   value={endereco.bairro}
                   required
                   disabled={buscando || removeMask(endereco.cep).length !== 8}
                   size="lg"
                   onChange={(event) => setEndereco({ ...endereco, bairro: event.target.value })}
                 />
+                <Form.Control.Feedback type="invalid">
+                  O campo bairro é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
             <Form.Row>
               <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="estado">
                 <Form.Control
-                  placeholder="Estado"
+                  placeholder="Estado *"
                   value={endereco.estado}
                   required
                   disabled={buscando || !endereco.cep?.length !== 8}
                   size="lg"
                   onChange={(event) => setEndereco({ ...endereco, estado: event.target.value })}
                 />
+                <Form.Control.Feedback type="invalid">
+                  O campo estado é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="col-sm-12 col-md-6" controlId="cidade" as={Col}>
                 <Form.Control
-                  placeholder="Cidade"
+                  placeholder="Cidade *"
                   value={endereco.cidade}
                   disabled={buscando || !endereco.cep?.length !== 8}
                   size="lg"
                   onChange={(event) => setEndereco({ ...endereco, cidade: event.target.value })}
                 ></Form.Control>
+                <Form.Control.Feedback type="invalid">
+                  O campo cidade é obrigatório!
+                </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
             <Form.Row>
-              {console.log(receber_comunicado)}
               <Form.Check
-                checked={receber_comunicado}
                 className="tamanho-texto my-3 ml-2"
                 type="checkbox"
                 size="lg"
                 label="Aceito receber comunicados oficiais oriundos da diretoria."
+                checked={receber_comunicado}
                 onChange={() => setReceberComunicado(!receber_comunicado)}
               />
+              <Form.Control.Feedback type="invalid">
+                O campo RG é obrigatório!
+              </Form.Control.Feedback>
             </Form.Row>
             <Form.Row className="justify-content-center mt-3">
               <Button size="lg" variant="danger" className="mr-1" onClick={limparState}>
