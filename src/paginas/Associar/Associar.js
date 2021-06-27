@@ -1,6 +1,6 @@
 import "./estilo.css";
 import React, { useEffect, useState, useRef } from "react";
-//import ServicoAssociado from "../../service/ServicoAssociado";
+import ServicoAssociado from "../../service/ServicoAssociado";
 import { buscaCEP } from "../../service/ServicoCEP";
 import { Form, Container, Row, Col, Button, Card, Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -43,7 +43,7 @@ export default function Associar(props) {
 
   const [tel_celular, setCelular] = useState({ numero: "", whatsapp: false });
   const [receber_comunicado, setReceberComunicado] = useState(true);
-  const [imagem, setImagem] = useState({ src: "", alt: "" });
+  const [imagem, setImagem] = useState(null);
   const [endereco, setEndereco] = useState({
     cep: "",
     estado: "",
@@ -65,31 +65,29 @@ export default function Associar(props) {
         const data = {
           ...associado,
           senha: md5(associado.senha),
-          imagem,
           endereco,
           receber_comunicado,
           tel_celular,
+          imagem,
         };
 
-        //await ServicoAssociado.cadastrarAssociado(data);
-        console.log(data);
+        await ServicoAssociado.cadastrarAssociado(data);
         mostrarAlerta(
           "error",
           `Registro realizado com sucesso! Você receberá um e-mail de confirmação quando seus dados forem validados pela administração.`
         );
 
         limparState();
-        setValidated(false);
       } catch (error) {
         mostrarAlerta("error", `Falha ao enviar sua mensagem! ${error.message}`);
       } finally {
         setSalvando(false);
-        setValidated(true);
       }
     }
   };
 
   function limparState() {
+    setValidated(false);
     setImagem({ src: "", alt: "" });
     setEndereco({
       cep: "",
@@ -195,7 +193,6 @@ export default function Associar(props) {
         <Row className="justify-content-center mb-5 mx-5">
           <h1 className="my-3">Associe-se</h1>
         </Row>
-        {console.log(associado)}
         <Row className="justify-content-center mb-5 mx-5">
           <Form
             className="formulario-cadastro"
@@ -203,12 +200,14 @@ export default function Associar(props) {
             validated={validated}
             onSubmit={salvarAssociado}
           >
+            {console.log(imagem)}
             <Form.Row>
               <Form.Group as={Col} controlId="imagem">
                 <ImageUploader
                   image={imagem}
                   className="mr-1"
-                  onUpload={(image) => setImagem(image)}
+                  onFileSelectSuccess={(image) => setImagem(image)}
+                  onFileSelectError={({ error }) => alert(error)}
                 />
               </Form.Group>
             </Form.Row>
@@ -314,7 +313,6 @@ export default function Associar(props) {
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
-
             <Form.Row>
               <h3 className="py-3">
                 <FontAwesomeIcon color="blue" icon={faPhoneAlt} size="1x" className="mr-2" />
@@ -389,7 +387,6 @@ export default function Associar(props) {
                 />
               </Form.Group>
             </Form.Row>
-
             <Form.Row>
               <Form.Group className="col-sm-12 col-md-6" as={Col} controlId="senha">
                 <Form.Control
