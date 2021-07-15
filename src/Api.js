@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
+import { apiHost } from "./configuracao.json";
 
 export default axios.create({
-  // baseURL: `https://whispering-plains-13580.herokuapp.com`,
-  baseURL: `http://localhost:4000`,
+  baseURL: apiHost,
   headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
   },
 });

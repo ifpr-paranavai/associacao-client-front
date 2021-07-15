@@ -1,10 +1,9 @@
 {
   "name": "front-associacao",
   "version": "0.1.0",
-  "proxy": "http://api.teste.com.br/v1",
   "homepage": "http://amaer.com.br/site",
   "engines": {
-    "node": "12.18.4"
+    "node": "10.5.0"
   },
   "private": true,
   "dependencies": {
