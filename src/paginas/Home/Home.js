@@ -34,7 +34,7 @@ class Home extends Component {
           strength={200}
         >
           <section className="principal py-5" id="sobrenos">
-            <SobreNos dados={dados.principal} logo={dados.logo} />
+            <SobreNos principal={dados.principal} logo={dados.logo} />
           </section>
         </Parallax>
         <section className="fundo-preto py-5 text-center" id="idnoticias">

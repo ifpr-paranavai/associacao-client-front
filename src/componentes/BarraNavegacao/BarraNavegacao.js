@@ -2,13 +2,14 @@ import "./estilo.css";
 import logo from "./../../assets/logo-amaer.png";
 import React, { Component } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import { baseRoute, adminHost } from "./../../configuracao.json";
 
 class BarraNavegacao extends Component {
   render() {
     return (
-      <Navbar className="nav-texto-branco py-4" expand="lg" fixed="top" id="menuopcoes">
+      <Navbar className="py-4" expand="lg" bg="dark" variant="dark" fixed="top" id="menuopcoes">
         <Container>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href={baseRoute + "/"}>
             <img
               src={logo}
               height="50"
@@ -17,21 +18,19 @@ class BarraNavegacao extends Component {
             />
           </Navbar.Brand>
 
-          <Navbar.Toggle aria-controls="basic-navbar-nav" className="menu-branco" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link href="/">INÍCIO</Nav.Link>
-              <Nav.Link href="/#sobre">SOBRE NÓS</Nav.Link>
-              <Nav.Link href="/eventos">EVENTOS</Nav.Link>
-              <Nav.Link href="/fotosvideos">FOTOS E VÍDEOS</Nav.Link>
-              <Nav.Link href="/classificados">CLASSIFICADOS</Nav.Link>
-              <Nav.Link href="/#contato">CONTATO</Nav.Link>
+            <Nav className="mx-auto">
+              <Nav.Link href={baseRoute + "/eventos"}>EVENTOS</Nav.Link>
+              <Nav.Link href={baseRoute + "/fotosvideos"}>FOTOS E VÍDEOS</Nav.Link>
+              <Nav.Link href={baseRoute + "/classificados"}>CLASSIFICADOS</Nav.Link>
+              <Nav.Link href={baseRoute + "/#contato"}>CONTATO</Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link href="/associar" className="ml-md-2 btn btn-outline-light">
+              <Nav.Link href={baseRoute + "/associar"} className="ml-md-2 btn btn-outline-light">
                 Associe-se
               </Nav.Link>
-              <Nav.Link href="#link" className="ml-md-2 mt-md-2 mt-lg-0 btn btn-outline-light">
+              <Nav.Link href={adminHost} className="ml-md-2 mt-md-2 mt-lg-0 btn btn-outline-light">
                 Área de Associado
               </Nav.Link>
             </Nav>

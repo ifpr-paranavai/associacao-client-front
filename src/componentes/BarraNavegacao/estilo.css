@@ -1,20 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 
-.brand-font{
-    font-family: 'Bangers', cursive;
-    font-size: 50px !important;
+.brand-font {
+  font-family: "Bangers", cursive;
+  font-size: 50px !important;
 }
 
-.nav-texto-branco * {
-    color: white !important;
-    
+.bg-dark {
+  background-color: black !important;
 }
 
-.nav-texto-branco {
-    background-color: black;
+.nav-link {
+  color: white !important;
 }
 
-.menu-branco{
-    background-color: white !important;
+.nav-link:hover {
+  color: rgb(214, 207, 207) !important;
 }
-

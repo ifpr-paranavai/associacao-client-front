@@ -7,6 +7,7 @@ import Classificados from "./paginas/Classificados/Classificados";
 import FotosVideos from "./paginas/FotosVideos/FotosVideos";
 import Associar from "./paginas/Associar/Associar";
 import Home from "./paginas/Home/Home";
+import { baseRoute } from "./configuracao.json";
 
 class App extends Component {
   render() {
@@ -15,11 +16,11 @@ class App extends Component {
         <BarraNavegacao />
         <Router>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/eventos" component={Eventos} />
-            <Route path="/associar" component={Associar} />
-            <Route path="/classificados" component={Classificados} />
-            <Route path="/fotosvideos" component={FotosVideos} />
+            <Route exact path={baseRoute + "/"} component={Home} />
+            <Route path={baseRoute + "/eventos"} component={Eventos} />
+            <Route path={baseRoute + "/associar"} component={Associar} />
+            <Route path={baseRoute + "/classificados"} component={Classificados} />
+            <Route path={baseRoute + "/fotosvideos"} component={FotosVideos} />
             <Route component={Home} />
           </Switch>
         </Router>

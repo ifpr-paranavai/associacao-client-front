@@ -1,7 +1,7 @@
 {
   "name": "front-associacao",
   "version": "0.1.0",
-  "homepage": "http://amaer.com.br/site",
+  "homepage": "http://localhost/site/",
   "engines": {
     "node": "10.5.0"
   },

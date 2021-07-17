@@ -1,3 +1,5 @@
 {
-  "apiHost": "http://amaer.com.br:21011"
+  "apiHost": "http://amaer.com.br:21011",
+  "baseRoute": "/site",
+  "adminHost": "http://amaer.com.br/admin"
 }
