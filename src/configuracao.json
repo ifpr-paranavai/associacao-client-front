@@ -1,5 +1,5 @@
 {
-  "apiHost": "http://amaer.com.br:21011",
+  "apiHost": "http://localhost:4000",
   "baseRoute": "/site",
-  "adminHost": "http://amaer.com.br/admin"
+  "adminHost": "http://localhost:4000"
 }
