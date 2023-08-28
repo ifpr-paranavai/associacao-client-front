@@ -24,7 +24,7 @@ class Noticias extends Component {
           <h1 className="mb-3 mt-3 text-dark text-xs-center">Notícias</h1>
         </Row>
         <CardDeck className="mb-3">
-          {noticias.map((noticia, i) => {
+        {noticias.length !== 0 && noticias.map((noticia, i) => {
             return (
               <Card
                 className="col-6 col-lg-4 p-4 my-3 mx-4 borda-cards-noticias"
