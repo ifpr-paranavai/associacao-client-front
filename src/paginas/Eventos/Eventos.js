@@ -35,7 +35,7 @@ function Eventos() {
   }, []);
 
   return (
-    <Container className={"my-card-content"}>
+    <Container>
       <Box
         display="flex"
         flexDirection="row"
