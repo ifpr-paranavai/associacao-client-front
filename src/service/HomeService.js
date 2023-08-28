@@ -22,13 +22,24 @@ class HomeService {
 
   static async obterNoticias() {
     try {
-      const { data } = await API.get("/noticias");
-      return data;
+      const { data } = await API.get(`/noticias`);
+      const noticiasComUrl = await Promise.all(
+        data.map(async noticia => {
+          const response = await API.get(`/noticias/${noticia.id}/anexo/download`, {
+            responseType: 'blob',
+          });
+          const blob = new Blob([response.data], { type: response.headers['content-type'] });
+          const url = window.URL.createObjectURL(blob);
+          return { ...noticia, url };
+        }),
+      );
+      return noticiasComUrl;
     } catch (error) {
       console.log(error);
       return error;
     }
   }
+
   static obterSobre() {
     const sobre = {
       texto: "Texto sobre a associação aeromodelismo.",
