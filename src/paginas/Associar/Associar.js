@@ -65,13 +65,20 @@ export default function Associar(props) {
         const data = {
           ...associado,
           senha: md5(associado.senha),
-          endereco,
+          cep: endereco.cep,
+          estado: endereco.estado,
+          cidade: endereco.cidade,
+          rua: endereco.rua,
+          bairro: endereco.bairro,
+          numero: endereco.numero,
           receber_comunicado,
-          tel_celular,
-          imagem,
+          tel_celular: tel_celular.numero,
+          imagem: imagem.src
         };
+        console.log(data)
 
         await ServicoAssociado.cadastrarAssociado(data);
+       
         mostrarAlerta(
           "error",
           `Registro realizado com sucesso! Você receberá um e-mail de confirmação quando seus dados forem validados pela administração.`
@@ -200,7 +207,6 @@ export default function Associar(props) {
             validated={validated}
             onSubmit={salvarAssociado}
           >
-            {console.log(imagem)}
             <Form.Row>
               <Form.Group as={Col} controlId="imagem">
                 <ImageUploader
