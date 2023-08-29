@@ -4,6 +4,7 @@ import BarraNavegacao from "./componentes/BarraNavegacao/BarraNavegacao";
 import Rodape from "./componentes/Rodape/Rodape";
 import Eventos from "./paginas/Eventos/Eventos";
 import Classificados from "./paginas/Classificados/Classificados";
+import Atas from "./paginas/Atas/Atas";
 import FotosVideos from "./paginas/FotosVideos/FotosVideos";
 import Associar from "./paginas/Associar/Associar";
 import Home from "./paginas/Home/Home";
@@ -20,6 +21,7 @@ class App extends Component {
             <Route path={baseRoute + "/eventos"} component={Eventos} />
             <Route path={baseRoute + "/associar"} component={Associar} />
             <Route path={baseRoute + "/classificados"} component={Classificados} />
+            <Route path={baseRoute + "/atas"} component={Atas} />
             <Route path={baseRoute + "/fotosvideos"} component={FotosVideos} />
             <Route component={Home} />
           </Switch>
