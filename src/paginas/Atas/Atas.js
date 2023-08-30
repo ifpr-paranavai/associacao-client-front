@@ -1,6 +1,11 @@
 import './estilo.css';
 import React, { Component} from 'react';
 import {Card, Row, Button, CardDeck, Container} from 'react-bootstrap';
+import {IconButton} from '@material-ui/core';
+import Axios from 'axios';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import Config from '../../configuracao.json';
 import AtaService from './../../service/AtasService'
 // import Atas from './../../componentes/Atas/Atas';
 
@@ -21,6 +26,35 @@ class Atas extends Component{
    
     const {atas} = this.state
     // let atas2 = this.state.atas;
+
+    async function handleDownloadAnexo(id) {
+      try {
+        const response = await Axios.get(`${Config.apiHost}/atas/${id}/anexo/download`, {
+          responseType: 'blob',
+        });
+        const blob = new Blob([response.data], { type: response.headers['content-type'] });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `anexo_${id}`);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      } catch (error) {
+      }
+    }
+
+    async function handlePreviewAnexo(id) {
+      try {
+        const response = await Axios.get(`${Config.apiHost}/atas/${id}/anexo/download`, {
+          responseType: 'blob',
+        });
+        const blob = new Blob([response.data], { type: response.headers['content-type'] });
+        const url = window.URL.createObjectURL(blob);
+        window.open(url, '_blank');
+      } catch (error) {
+      }
+    }
     return (
       <Container className="py-5">
         <Row className="justify-content-center">
@@ -34,6 +68,22 @@ class Atas extends Component{
                   <Card.Body>
                     <Card.Title>{ata.titulo} </Card.Title>
                     <Card.Title>{ata.descricao} </Card.Title>
+                    <IconButton
+                    aria-label="visualizar"
+                    onClick={() => {
+                      handlePreviewAnexo(ata.id);
+                    }}
+                  >
+                    <VisibilityIcon />
+                  </IconButton>
+                    <IconButton
+                    aria-label="download"
+                    onClick={() => {
+                      handleDownloadAnexo(ata.id);
+                    }}
+                  >
+                    <GetAppIcon />
+                    </IconButton>
                   </Card.Body>
                 </Card>
               )}
