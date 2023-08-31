@@ -2,16 +2,26 @@ import "./estilo.css";
 import React, { useEffect, useState, useRef } from "react";
 import ServicoAssociado from "../../service/ServicoAssociado";
 import { buscaCEP } from "../../service/ServicoCEP";
-import { Form, Container, Row, Col, Button, Card, Alert } from "react-bootstrap";
+import { Form, Container, Row, Col, Button, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ImageUploader from "../../componentes/ImageUploader/ImageUploader";
 import { faUser, faHome, faPhoneAlt, faCar, faPlane } from "@fortawesome/free-solid-svg-icons";
 import MaskedFormControl from "../../componentes/MaskedFormControl/MaskedFormControl";
 import ModalAssociar from "../../componentes/Modal";
 import { removeMask } from "../../uteis/string";
 import md5 from "md5";
 
+import CustomToast from "../../componentes/toast/CustomToast"
+
 export default function Associar(props) {
+  const [showToast, setShowToast] = useState(false);
+  const [toastVariant, setToastVariant] = useState("success");
+  const [toastMessage, setToastMessage] = useState("");
+
+  const handleToastClose = () => {
+    setShowToast(false);
+    setToastMessage("");
+  };
+
   const numberRef = useRef(null);
   const [salvando, setSalvando] = useState(false);
   const [buscando, setBuscando] = useState(false);
@@ -19,7 +29,6 @@ export default function Associar(props) {
   const [mensagem, setMensagem] = useState("");
   const [tipoAlerta, setTipoAlerta] = useState("error");
   const [validated, setValidated] = useState(false);
-
   const [associado, setAssociado] = useState({
     nome: "",
     sobrenome: "",
@@ -34,16 +43,8 @@ export default function Associar(props) {
     perfil: "ASSOCIADO",
     senha: "",
   });
-
-  const set = (atributo) => {
-    return ({ target: { value } }) => {
-      setAssociado((valoresAntigos) => ({ ...valoresAntigos, [atributo]: value }));
-    };
-  };
-
   const [tel_celular, setCelular] = useState({ numero: "", whatsapp: false });
   const [receber_comunicado, setReceberComunicado] = useState(true);
-  const [imagem, setImagem] = useState(null);
   const [endereco, setEndereco] = useState({
     cep: "",
     estado: "",
@@ -52,6 +53,12 @@ export default function Associar(props) {
     bairro: "",
     numero: "",
   });
+
+  const set = (atributo) => {
+    return ({ target: { value } }) => {
+      setAssociado((valoresAntigos) => ({ ...valoresAntigos, [atributo]: value }));
+    };
+  };
 
   const salvarAssociado = async (event) => {
     event.preventDefault();
@@ -73,20 +80,20 @@ export default function Associar(props) {
           numero: endereco.numero,
           receber_comunicado,
           tel_celular: tel_celular.numero,
-          imagem: imagem.src
+          whatsapp: tel_celular.whatsapp,
         };
-        console.log(data)
 
         await ServicoAssociado.cadastrarAssociado(data);
-       
-        mostrarAlerta(
-          "error",
-          `Registro realizado com sucesso! Você receberá um e-mail de confirmação quando seus dados forem validados pela administração.`
-        );
+        
+        setToastVariant("success");
+        setToastMessage("Registro realizado com sucesso! Você receberá um e-mail de confirmação quando seus dados forem validados pela administração.");
+        setShowToast(true);
 
         limparState();
       } catch (error) {
-        mostrarAlerta("error", `Falha ao enviar sua mensagem! ${error.message}`);
+        setToastVariant("danger");
+        setToastMessage(`Falha ao se associar! ${error.message}`);
+        setShowToast(true);
       } finally {
         setSalvando(false);
       }
@@ -95,7 +102,6 @@ export default function Associar(props) {
 
   function limparState() {
     setValidated(false);
-    setImagem({ src: "", alt: "" });
     setEndereco({
       cep: "",
       estado: "",
@@ -191,32 +197,19 @@ export default function Associar(props) {
 
   return (
     <Container className="mt-5 pt-5 ">
-      <Alert show={alerta} variant={tipoAlerta} onClose={fecharAlerta} dismissible>
-        <Alert.Heading>Mensagem!</Alert.Heading>
-        <p>{mensagem}</p>
-      </Alert>
       <Card className="efeito-card-form px-3 my-5">
         <ModalAssociar></ModalAssociar>
         <Row className="justify-content-center mb-5 mx-5">
           <h1 className="my-3">Associe-se</h1>
         </Row>
         <Row className="justify-content-center mb-5 mx-5">
+          <CustomToast show={showToast} onClose={handleToastClose} variant={toastVariant} message={toastMessage} />
           <Form
             className="formulario-cadastro"
             noValidate
             validated={validated}
             onSubmit={salvarAssociado}
           >
-            <Form.Row>
-              <Form.Group as={Col} controlId="imagem">
-                <ImageUploader
-                  image={imagem}
-                  className="mr-1"
-                  onFileSelectSuccess={(image) => setImagem(image)}
-                  onFileSelectError={({ error }) => alert(error)}
-                />
-              </Form.Group>
-            </Form.Row>
             <Form.Row>
               <h3 className="py-3">
                 <FontAwesomeIcon color="blue" icon={faPlane} size="1x" className="mr-2" />
