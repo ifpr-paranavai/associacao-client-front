@@ -1,3 +1,44 @@
-.borda-cards-eventos{
-    box-shadow: rgb(163, 163, 163)  3px 3px 15px  !important;
-}
+.root {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .mockProgressBar {
+    height: 2px;
+  }
+  
+  .table {
+    width: 100%;
+    position: relative;
+    table-layout: fixed;
+  }
+  
+  .tableLoading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 999;
+  }
+  
+  .divButton {
+    margin-bottom: 20px;
+  }
+  
+  .wrapper {
+    position: relative;
+  }
+  
+  .buttonProgress {
+    color: blue;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -12;
+    margin-left: -12;
+  }
+  
+  .celula{
+    width: 25%;
+  }
+  

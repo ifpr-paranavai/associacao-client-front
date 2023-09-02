@@ -1,57 +1,121 @@
-import './estilo.css';
-import React, { Component} from 'react';
-import {Card, Row, Button, CardDeck, Container} from 'react-bootstrap';
-import EventoService from './../../service/EventoService'
-// import Eventos from './../../componentes/Eventos/Eventos';
+import React, { useState, useEffect } from "react";
+import {
+  Box,
+  Paper,
+  Card,
+  Grid,
+  CardContent,
+  CardMedia,
+  CardActions,
+  Link,
+  Avatar,
+  IconButton,
+  Container,
+  Button,
+} from "@material-ui/core";
+import { formatarData } from "../../uteis/formatarData";
+import EventoService from "../../service/EventoService";
+import { useNotify } from "../../contextos/Notificacao";
+import styles from "./estilo.css";
 
+function Eventos() {
+  const [eventos, setEventos] = useState([]);
+  const notify = useNotify();
 
-
-class Eventos extends Component{
-  constructor (props){
-    super(props);
-    this.state = {
-        eventos: []
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        let eventos = await EventoService.obterEventos();
+        setEventos(eventos);
+      } catch (error) {
+        notify.showError(error.message);
+      }
     }
-  }
-  async componentDidMount() {
-      let eventos = await EventoService.obterEventos();
-      this.setState({ eventos })
-  }
-   render(){
-   
-    const {eventos} = this.state
-    // let eventos2 = this.state.eventos;
-    return (
-      <Container className="py-5">
-        <Row className="justify-content-center">
-          <h1 className="mb-3 mt-3 text-dark text-xs-center">Eventos</h1>
-        </Row>
-        <CardDeck className="mb-3">
-          {
-            eventos.map(evento => {
-              return (
-                <Card className = "col-6 col-lg-4 p-4 my-3 mx-4 borda-cards-eventos" key={evento.id}>
-                  <Card.Img variant="top" 
-                    src= {evento.imagem.src }
-                    alt={evento.imagem.alt}
-                  />
-                  <Card.Body>
-                    <Card.Title>{evento.titulo} </Card.Title>
-                    <Card.Text>{evento.descricao} </Card.Text>
-                    <Card.Link>{evento.link}</Card.Link>
-                  </Card.Body>
-                </Card>
-              )}
-            )
-          }
-        </CardDeck>
-        <Row className="justify-content-end">
-          <Button href="/eventos" variant="secondary" size="lg">+ Eventos</Button>
-        </Row>
-      </Container>   
-    )
+    fetchData();
+  }, []);
 
-  }
+  return (
+    <Container>
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+        width="100%"
+        paddingBottom="120px"
+        paddingTop="12px"
+      >
+        {/* A busca vai aqui */}
+      </Box>
+      <Grid container spacing={3}>
+        {eventos.map((evento) => (
+          <Grid item key={evento.id} xs={12} sm={6} md={4}>
+            <Card style={{ borderRadius: "16px" }}>
+              <CardMedia
+                component="img"
+                alt="Imagem do Evento"
+                height="220"
+                image={evento.url}
+                title="Imagem do Evento"
+              />
+              <CardContent>
+                <h2 style={{ fontFamily: "Arial", wordWrap: "break-word" }}>
+                  {evento.titulo}
+                </h2>
+                <p
+                  style={{
+                    fontFamily: "Arial",
+                    fontSize: 16,
+                    wordWrap: "break-word",
+                  }}
+                >
+                  {" "}
+                  {`${formatarData(evento.data_inicio)} a ${formatarData(
+                    evento.data_fim
+                  )}`}
+                </p>
+                <p
+                  style={{
+                    fontFamily: "Arial",
+                    fontSize: 18,
+                    wordWrap: "break-word",
+                  }}
+                >
+                  {evento.descricao}
+                </p>
+                <p
+                  style={{
+                    fontFamily: "Arial",
+                    fontSize: 16,
+                    wordWrap: "break-word",
+                  }}
+                >
+                  {evento.local}
+                </p>
+                <a
+                  href={`//${evento.link}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {evento.link}
+                </a>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+      {/* qualquer outra coisa aqui */}
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+        width="100%"
+        paddingBottom="20px"
+        paddingTop="12px"
+      ></Box>
+    </Container>
+  );
 }
 
 export default Eventos;
