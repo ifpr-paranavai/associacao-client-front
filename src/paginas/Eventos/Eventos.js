@@ -7,7 +7,6 @@ import {
   CardContent,
   CardMedia,
   CardActions,
-  Link,
   Avatar,
   IconButton,
   Container,
@@ -18,6 +17,7 @@ import { formatarData } from "../../uteis/formatarData";
 import EventoService from "../../service/EventoService";
 import { useNotify } from "../../contextos/Notificacao";
 import styles from "./estilo.css";
+import { Link } from "react-router-dom";
 
 function Eventos() {
   const [eventos, setEventos] = useState([]);
@@ -55,17 +55,31 @@ function Eventos() {
         {eventos.map((evento) => (
           <Grid item key={evento.id} xs={12} sm={6} md={4}>
             <Card style={{ borderRadius: "16px" }}>
-              <CardMedia
-                component="img"
-                alt="Imagem do Evento"
-                height="220"
-                image={evento.url}
-                title="Imagem do Evento"
-              />
+              <Link to={`/site/evento/${evento.id}`}>
+                <CardMedia
+                  component="img"
+                  alt="Imagem do Evento"
+                  height="220"
+                  image={evento.url}
+                  title="Imagem do Evento"
+                />
+              </Link>
               <CardContent>
-                <h2 style={{ fontFamily: "Arial", wordWrap: "break-word" }}>
-                  {evento.titulo}
-                </h2>
+                <Link
+                  to={`/site/evento/${evento.id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <h2
+                    style={{
+                      fontFamily: "Arial",
+                      wordWrap: "break-word",
+                      color: "black",
+                    }}
+                  >
+                    {evento.titulo}
+                  </h2>
+                </Link>
+
                 <p
                   style={{
                     fontFamily: "Arial",
@@ -85,24 +99,40 @@ function Eventos() {
                     wordWrap: "break-word",
                   }}
                 >
-                  {evento.descricao}
+                  {evento.descricao.length > 129 ? (
+                    <>
+                      {`${evento.descricao.substring(0, 129)}`}
+                      <Link to={`/site/evento/${evento.id}`}>
+                        ... Saiba mais
+                      </Link>
+                    </>
+                  ) : (
+                    evento.descricao
+                  )}
                 </p>
                 <p
                   style={{
                     fontFamily: "Arial",
-                    fontSize: 16,
+                    fontSize: 18,
                     wordWrap: "break-word",
                   }}
                 >
-                  {evento.local}
+                  {`Local: ${evento.local}`}
                 </p>
-                <a
-                  href={`//${evento.link}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {evento.link}
-                </a>
+                <p style={{
+                    fontFamily: "Arial",
+                    fontSize: 16,
+                    wordWrap: "break-word",
+                  }}>
+                  Participe:{" "}
+                  <a
+                    href={`//${evento.link}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {evento.link}
+                  </a>
+                </p>
               </CardContent>
             </Card>
           </Grid>
