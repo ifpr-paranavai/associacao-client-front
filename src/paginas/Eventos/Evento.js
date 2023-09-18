@@ -19,6 +19,8 @@ import EventoService from "../../service/EventoService";
 import { useNotify } from "../../contextos/Notificacao";
 import styles from "./estilo.css";
 import { useParams } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function Evento() {
   const [evento, setEvento] = useState({});
@@ -74,16 +76,7 @@ function Evento() {
               evento.data_fim
             )}`}
           </p>
-          <p
-            style={{
-              fontFamily: "Arial",
-              fontSize: 22,
-              wordWrap: "break-word",
-              whiteSpace: "pre-line"
-            }}
-          >
-            {evento.descricao}
-          </p>
+          <ReactQuill value={evento.descricao} readOnly theme={null} />
           <p
             style={{
               fontFamily: "Arial",

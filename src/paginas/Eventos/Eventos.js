@@ -18,6 +18,7 @@ import EventoService from "../../service/EventoService";
 import { useNotify } from "../../contextos/Notificacao";
 import styles from "./estilo.css";
 import { Link } from "react-router-dom";
+import ReactQuill from "react-quill";
 
 function Eventos() {
   const [eventos, setEventos] = useState([]);
@@ -92,24 +93,16 @@ function Eventos() {
                     evento.data_fim
                   )}`}
                 </p>
-                <p
-                  style={{
-                    fontFamily: "Arial",
-                    fontSize: 18,
-                    wordWrap: "break-word",
-                  }}
-                >
-                  {evento.descricao.length > 129 ? (
-                    <>
-                      {`${evento.descricao.substring(0, 129)}`}
-                      <Link to={`/site/evento/${evento.id}`}>
-                        ... Saiba mais
-                      </Link>
-                    </>
-                  ) : (
-                    evento.descricao
-                  )}
-                </p>
+                <ReactQuill
+                  value={
+                    evento.descricao.length > 129
+                      ? `${evento.descricao.substring(0, 129)}...`
+                      : evento.descricao
+                  }
+                  readOnly
+                  theme={null}
+                />
+
                 <p
                   style={{
                     fontFamily: "Arial",
@@ -119,11 +112,13 @@ function Eventos() {
                 >
                   {`Local: ${evento.local}`}
                 </p>
-                <p style={{
+                <p
+                  style={{
                     fontFamily: "Arial",
                     fontSize: 16,
                     wordWrap: "break-word",
-                  }}>
+                  }}
+                >
                   Participe:{" "}
                   <a
                     href={`//${evento.link}`}
