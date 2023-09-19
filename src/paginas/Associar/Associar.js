@@ -81,6 +81,7 @@ export default function Associar(props) {
           receber_comunicado,
           tel_celular: tel_celular.numero,
           whatsapp: tel_celular.whatsapp,
+          ativo: false
         };
 
         await ServicoAssociado.cadastrarAssociado(data);
@@ -128,14 +129,6 @@ export default function Associar(props) {
       tel_celular: "",
     });
     setCelular({ numero: "", whatsapp: false });
-  }
-
-  function fecharAlerta() {
-    setAlerta(false);
-    setTimeout(() => {
-      setMensagem("");
-      setTipoAlerta("error");
-    }, 100);
   }
 
   function mostrarAlerta(tipo, mensagem) {
