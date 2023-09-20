@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import BarraNavegacao from "./componentes/BarraNavegacao/BarraNavegacao";
 import Rodape from "./componentes/Rodape/Rodape";
 import Eventos from "./paginas/Eventos/Eventos";
+import Evento from "./paginas/Eventos/Evento";
 import Classificados from "./paginas/Classificados/Classificados";
 import Atas from "./paginas/Atas/Atas";
 import FotosVideos from "./paginas/FotosVideos/FotosVideos";
@@ -19,6 +20,7 @@ class App extends Component {
           <Switch>
             <Route exact path={baseRoute + "/"} component={Home} />
             <Route path={baseRoute + "/eventos"} component={Eventos} />
+            <Route path={baseRoute + "/evento/:id"} component={Evento} />
             <Route path={baseRoute + "/associar"} component={Associar} />
             <Route path={baseRoute + "/classificados"} component={Classificados} />
             <Route path={baseRoute + "/atas"} component={Atas} />
