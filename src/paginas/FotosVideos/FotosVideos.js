@@ -30,9 +30,12 @@ class FotosVideos extends Component{
         <Row className="justify-content-center">
           <h1 className="mb-3 mt-3 text-dark text-xs-center">Fotos</h1>
         </Row>
+        <Row className="justify-content-end">
+          <Button href="/classificados" variant="secondary" size="lg">+ Fotos</Button>
+        </Row>
         <CardDeck className="mb-3">
           {
-            fotos.map(foto => {
+            fotos.length > 0 && fotos.map(foto => {
               return (
                 <Card className = "col-6 col-lg-4 p-4 my-3 mx-4 borda-cards-eventos" key={foto.id}>
                   <Card.Img variant="top" 
@@ -44,18 +47,12 @@ class FotosVideos extends Component{
             )
           }
         </CardDeck>
-        <Row className="justify-content-end">
-          <Button href="/classificados" variant="secondary" size="lg">+ Fotos</Button>
-        </Row>
-      
-
-      
         <Row className="justify-content-center">
           <h1 className="mb-3 mt-3 text-dark text-xs-center">Vídeos</h1>
         </Row>
         <CardDeck className="mb-3">
           {
-            videos.map(video => {
+            videos.length > 0 && videos.map(video => {
               return (
                 <Card className = "col-6 col-lg-4 p-4 my-3 mx-4 borda-cards-eventos" key={video.id}>
                   <Card.Img variant="top" 
