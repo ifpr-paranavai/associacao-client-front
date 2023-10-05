@@ -11,6 +11,11 @@ import {
   IconButton,
   Container,
   Button,
+  TableRow,
+  TableCell,
+  TablePagination,
+  LinearProgress,
+  InputAdornment,
 } from "@material-ui/core";
 import { Row, Button as ButtonBootstrap } from "react-bootstrap";
 import { formatarData } from "../../uteis/formatarData";
@@ -19,22 +24,68 @@ import { useNotify } from "../../contextos/Notificacao";
 import styles from "./estilo.css";
 import { Link } from "react-router-dom";
 import ReactQuill from "react-quill";
+import {Search as SearchIcon} from '@material-ui/icons';
+import API from "../../Api";
+import TextField from '@material-ui/core/TextField';
 
 function Eventos() {
   const [eventos, setEventos] = useState([]);
   const notify = useNotify();
+  const [searchValue, setSearchValue] = useState('');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(3);
+  const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const handleSearchChange = event => {
+    setSearchValue(event.target.value);
+    setPage(0);
+  };
+
+  async function handlePreview(id) {
+    try {
+      const response = await API.get(`/eventos/${id}/anexo/download`, {
+        responseType: 'blob',
+      });
+      const blob = new Blob([response.data], { type: response.headers['content-type'] });
+      const url = window.URL.createObjectURL(blob);
+      return url;
+    } catch (error) {
+      notify.showError(`${error}`);
+    }
+  }
 
   useEffect(() => {
     async function fetchData() {
       try {
-        let eventos = await EventoService.obterEventos();
-        setEventos(eventos);
+        setLoading(true);
+        let dadosAPI;
+        if (searchValue) {
+          dadosAPI = await EventoService.buscarPorTitulo(
+            searchValue,
+            rowsPerPage,
+            page + 1,
+          );
+        } else {
+          dadosAPI = await EventoService.listarEventos(rowsPerPage, page + 1);
+        }
+
+        const eventosComPreview = await Promise.all(
+          dadosAPI.rows.map(async evento => ({
+            ...evento,
+            previewUrl: await handlePreview(evento.id),
+          })),
+        );
+
+        setCount(dadosAPI.count || dadosAPI.length);
+        setEventos(eventosComPreview);
+        setLoading(false);
       } catch (error) {
-        notify.showError(error.message);
+        setLoading(false);
       }
     }
     fetchData();
-  }, []);
+  }, [searchValue, page, rowsPerPage]);
 
   return (
     <Container>
@@ -46,14 +97,38 @@ function Eventos() {
         width="100%"
         paddingBottom="100px"
         paddingTop="12px"
-      >
-        {/* A busca vai aqui */}
-      </Box>
+      ></Box>
       <Row className="justify-content-center">
         <h1 className="mb-3 mt-3 text-dark text-xs-center">Eventos</h1>
       </Row>
+      <TextField
+          placeholder="Buscar por titulo ou data"
+          variant="outlined"
+          size="small"
+          style={{ width: '100%', maxWidth: '400px', padding:'15px'}}
+          value={searchValue}
+          onChange={handleSearchChange}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon color="action" />
+              </InputAdornment>
+            ),
+          }}
+        />
       <Grid container spacing={3}>
-        {eventos.map((evento) => (
+      {(() => {
+          if (loading) {
+            return (
+              <TableRow>
+                <TableCell colSpan={3} align="center">
+                  <LinearProgress />
+                </TableCell>
+              </TableRow>
+            );
+          }
+          if (eventos.length > 0) {
+            return eventos.map(evento => (
           <Grid item key={evento.id} xs={12} sm={6} md={4}>
             <Card style={{ borderRadius: "16px" }}>
               <Link to={`/site/evento/${evento.id}`}>
@@ -61,7 +136,7 @@ function Eventos() {
                   component="img"
                   alt="Imagem do Evento"
                   height="220"
-                  image={evento.url}
+                  image={evento.previewUrl}
                   title="Imagem do Evento"
                 />
               </Link>
@@ -130,14 +205,31 @@ function Eventos() {
                 </p>
               </CardContent>
             </Card>
-          </Grid>
-        ))}
+            </Grid>
+            ));
+          }
+          return (
+            <Grid>
+              <TableCell colSpan={3} align="center">
+                Nenhuma ata encontrada
+              </TableCell>
+            </Grid>
+          );
+        })()}
       </Grid>
-      <Row className="justify-content-end">
-        <Button href="/site/eventos" variant="secondary" size="lg">
-          + Eventos
-        </Button>
-      </Row>
+      <TablePagination
+        rowsPerPageOptions={[3, 6, 12, 24]}
+        component="div"
+        count={count}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={(event, newPage) => setPage(newPage)}
+        onRowsPerPageChange={event => {
+          setRowsPerPage(parseInt(event.target.value, 10));
+          setPage(0);
+        }}
+        disabled={loading}
+      />
       <Box
         display="flex"
         flexDirection="row"
