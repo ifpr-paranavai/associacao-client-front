@@ -39,6 +39,23 @@ class HomeService {
     return data;
   }
 
+  static async buscarPorId(id) {
+    try {
+      const { data: noticia } = await API.get(`/noticias/${id}`);
+      const response = await API.get(`/noticias/${id}/anexo/download`, {
+        responseType: 'blob',
+      });
+      const blob = new Blob([response.data], { type: response.headers['content-type'] });
+      const url = window.URL.createObjectURL(blob);
+      noticia.url = url;
+  
+      return noticia;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
   static obterSobre() {
     const sobre = {
       texto: "Texto sobre a associação aeromodelismo.",

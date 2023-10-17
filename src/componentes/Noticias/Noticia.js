@@ -15,23 +15,23 @@ import {
 } from "@material-ui/core";
 import { Row, Button as ButtonBootstrap } from "react-bootstrap";
 import { formatarData } from "../../uteis/formatarData";
-import EventoService from "../../service/EventoService";
+import NoticiaService from "../../service/HomeService";
 import { useNotify } from "../../contextos/Notificacao";
 import styles from "./estilo.css";
 import { useParams } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-function Evento() {
-  const [evento, setEvento] = useState({});
+function Noticia() {
+  const [noticia, setNoticia] = useState({});
   const notify = useNotify();
   const { id } = useParams();
 
   useEffect(() => {
     async function fetchData() {
       try {
-        let evento = await EventoService.buscarPorId(id);
-        setEvento(evento);
+        let noticia = await NoticiaService.buscarPorId(id);
+        setNoticia(noticia);
       } catch (error) {
         notify.showError(error.message);
       }
@@ -53,14 +53,14 @@ function Evento() {
         {/* A busca vai aqui */}
       </Box>
       <Row className="justify-content-center">
-        <h1 className="mb-3 mt-3 text-dark text-xs-center">{evento.titulo}</h1>
+        <h1 className="mb-3 mt-3 text-dark text-xs-center">{noticia.titulo}</h1>
       </Row>
       <Card style={{ borderRadius: "10px" }}>
-        <div style={{ display: "flex", justifyContent: "center", margin: "50px 0" }}>
+        <div style={{ display: "flex", justifyContent: "center", margin: "50px 0"  }}>
           <CardMedia
             component="img"
             alt="Imagem do Evento"
-            image={evento.url}
+            image={noticia.url}
             title="Imagem do Evento"
             style={{
               objectFit: "cover",
@@ -80,40 +80,13 @@ function Evento() {
             }}
           >
             {" "}
-            {`Data: ${formatarData(evento.data_inicio)} a ${formatarData(
-              evento.data_fim
-            )}`}
+            {`Data: ${formatarData(noticia.data_inicio)}`}
           </p>
-          <ReactQuill value={evento.descricao} readOnly theme={null} />
-          <p
-            style={{
-              fontFamily: "Arial",
-              fontSize: 18,
-              wordWrap: "break-word",
-            }}
-          >
-            {`Local: ${evento.local}`}
-          </p>
-          <p
-            style={{
-              fontFamily: "Arial",
-              fontSize: 18,
-              wordWrap: "break-word",
-            }}
-          >
-            Participe:{" "}
-            <a
-              href={`//${evento.link}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {evento.link}
-            </a>
-          </p>
+          <ReactQuill value={noticia.descricao} readOnly theme={null} />
         </CardContent>
       </Card>
       <Row className="justify-content-end">
-        <Button href="/site/eventos" variant="secondary" size="lg">
+        <Button href="/site/" variant="secondary" size="lg">
           Voltar
         </Button>
       </Row>
@@ -130,4 +103,4 @@ function Evento() {
   );
 }
 
-export default Evento;
+export default Noticia;
