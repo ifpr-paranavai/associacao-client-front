@@ -20,20 +20,36 @@ class HomeService {
     };
   }
 
-  static async obterNoticias() {
+  static async listarNoticias(limite, pagina) {
     try {
-      const { data } = await API.get(`/noticias`);
-      const noticiasComUrl = await Promise.all(
-        data.map(async noticia => {
-          const response = await API.get(`/noticias/${noticia.id}/anexo/download`, {
-            responseType: 'blob',
-          });
-          const blob = new Blob([response.data], { type: response.headers['content-type'] });
-          const url = window.URL.createObjectURL(blob);
-          return { ...noticia, url };
-        }),
-      );
-      return noticiasComUrl;
+      const response = await API.get(`/noticias`, {
+        params: { ...{ limite, pagina } },
+      });
+      return response.data;
+    } catch (error) {
+      // console.error('Erro ao obter dados da API:', error);
+      throw error;
+    }
+  }
+
+  static async buscarPorTitulo(titulo, limite, pagina) {
+    const { data } = await API.get(`/noticias/titulo/${titulo}`, {
+      params: { ...{ limite, pagina } },
+    });
+    return data;
+  }
+
+  static async buscarPorId(id) {
+    try {
+      const { data: noticia } = await API.get(`/noticias/${id}`);
+      const response = await API.get(`/noticias/${id}/anexo/download`, {
+        responseType: 'blob',
+      });
+      const blob = new Blob([response.data], { type: response.headers['content-type'] });
+      const url = window.URL.createObjectURL(blob);
+      noticia.url = url;
+  
+      return noticia;
     } catch (error) {
       console.log(error);
       return error;

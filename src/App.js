@@ -10,6 +10,7 @@ import FotosVideos from "./paginas/FotosVideos/FotosVideos";
 import Associar from "./paginas/Associar/Associar";
 import Home from "./paginas/Home/Home";
 import { baseRoute } from "./configuracao.json";
+import Noticia from "./componentes/Noticias/Noticia";
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
             <Route exact path={baseRoute + "/"} component={Home} />
             <Route path={baseRoute + "/eventos"} component={Eventos} />
             <Route path={baseRoute + "/evento/:id"} component={Evento} />
+            <Route path={baseRoute + "/noticia/:id"} component={Noticia} />
             <Route path={baseRoute + "/associar"} component={Associar} />
             <Route path={baseRoute + "/classificados"} component={Classificados} />
             <Route path={baseRoute + "/atas"} component={Atas} />
