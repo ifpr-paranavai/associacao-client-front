@@ -44,6 +44,11 @@ class Rodape extends Component {
                   </a>
                 </li>
                 <li className="pt-2">
+                  <a href={baseRoute + "/atas"} className="text-light">
+                    ATAS
+                  </a>
+                </li>
+                <li className="pt-2">
                   <a href={baseRoute + "/#contato"} className="text-light">
                     CONTATO
                   </a>

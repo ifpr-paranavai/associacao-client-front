@@ -1,5 +1,5 @@
 {
   "apiHost": "https://amaer.com.br/api",
   "baseRoute": "/site",
-  "adminHost": "https://amaer.com.br/api"
+  "adminHost": "https://amaer.com.br/admin"
 }

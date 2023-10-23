@@ -35,7 +35,7 @@ function Atas() {
   const notify = useNotify();
   const [searchValue, setSearchValue] = useState("");
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(3);
+  const [rowsPerPage, setRowsPerPage] = useState(6);
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -212,7 +212,7 @@ function Atas() {
         })()}
       </Grid>
       <TablePagination
-        rowsPerPageOptions={[3, 6, 12, 24]}
+        rowsPerPageOptions={[6, 12, 24]}
         component="div"
         count={count}
         rowsPerPage={rowsPerPage}
