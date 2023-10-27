@@ -11,7 +11,11 @@ class ServicoAssociado {
   }
 
   static async buscarTextoModal() {
-    return await textoModal;
+    const response = await API.get("/textoModal");
+    if (response.status !== 200) {
+      throw new Error(`Erro ao processar sua requisição: ${response.status}`);
+    }
+    return response.data;
   }
 }
 

@@ -12,12 +12,15 @@ export default function ModalAssociar() {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    // Atualiza o titulo do documento usando a API do browser
     const fetchData = async () => {
-      const { titulo, corpo } = await ServicoAssociado.buscarTextoModal();
-      setTitulo(titulo);
-      setCorpo(corpo);
+      const data = await ServicoAssociado.buscarTextoModal();
+      if (data && data.length > 0) {
+        const { titulo, corpo } = data[0];
+        setTitulo(titulo);
+        setCorpo(corpo);
+      }
     };
+  
     fetchData();
   }, []);
   return (
