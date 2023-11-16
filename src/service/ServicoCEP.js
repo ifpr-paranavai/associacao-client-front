@@ -7,6 +7,6 @@ export const brasilAPI = axios.create({
 });
 
 export const buscaCEP = async (cep) => {
-  const { data } = await brasilAPI.get(`/cep/v2/${cep}`);
+  const { data } = await brasilAPI.get(`/cep/v1/${cep}`);
   return data;
 };
