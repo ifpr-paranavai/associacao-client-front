@@ -16,6 +16,7 @@ export default function Associar(props) {
   const [showToast, setShowToast] = useState(false);
   const [toastVariant, setToastVariant] = useState("success");
   const [toastMessage, setToastMessage] = useState("");
+  const [apiOnline, setApiOnline] = useState(false);
 
   const handleToastClose = () => {
     setShowToast(false);
@@ -142,6 +143,10 @@ export default function Associar(props) {
   useEffect(() => {
     async function findAddress(unmaskedCEP) {
       try {
+        const response = await fetch('https://api.brasilaberto.com/v1/zipcode/87920000');
+        const apiOnline = response.ok;
+        setApiOnline(apiOnline);
+
         setBuscando(true);
         const address = await buscaCEP(unmaskedCEP);
 
@@ -158,14 +163,17 @@ export default function Associar(props) {
         }, 120);
       } catch (error) {
         mostrarAlerta("error", "CEP inválido!");
-        setEndereco({
-          cep: "",
-          estado: "",
-          cidade: "",
-          bairro: "",
-          rua: "",
-          numero: "",
-        });
+        setApiOnline(false);
+        if (apiOnline){
+          setEndereco({
+            cep: "",
+            estado: "",
+            cidade: "",
+            bairro: "",
+            rua: "",
+            numero: "",
+          });
+        }
       } finally {
         setBuscando(false);
       }
@@ -461,7 +469,7 @@ export default function Associar(props) {
                   placeholder="Estado *"
                   value={endereco.estado}
                   required
-                  disabled={buscando || !endereco.cep?.length !== 8}
+                  disabled={buscando || apiOnline}
                   size="lg"
                   onChange={(event) => setEndereco({ ...endereco, estado: event.target.value })}
                 />
@@ -473,7 +481,7 @@ export default function Associar(props) {
                 <Form.Control
                   placeholder="Cidade *"
                   value={endereco.cidade}
-                  disabled={buscando || !endereco.cep?.length !== 8}
+                  disabled={buscando || apiOnline}
                   size="lg"
                   onChange={(event) => setEndereco({ ...endereco, cidade: event.target.value })}
                 ></Form.Control>
