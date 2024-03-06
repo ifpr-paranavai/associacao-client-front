@@ -147,10 +147,10 @@ export default function Associar(props) {
 
         setEndereco({
           ...endereco,
-          estado: address.state,
-          cidade: address.city,
-          bairro: address.neighborhood,
-          rua: address.street,
+          estado: address.result.state,
+          cidade: address.result.city,
+          bairro: address.result.district,
+          rua: address.result.street,
         });
 
         setTimeout(() => {
