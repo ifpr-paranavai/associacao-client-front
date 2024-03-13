@@ -190,12 +190,12 @@ export default function Associar(props) {
 
   return (
     <Container className="mt-5 pt-5 ">
-      <Card className="efeito-card-form px-3 my-5">
+     <Card className="px-3 my-5">
         <ModalAssociar></ModalAssociar>
-        <Row className="justify-content-center mb-5 mx-5">
+        <Row className="justify-content-center">
           <h1 className="my-3">Associe-se</h1>
         </Row>
-        <Row className="justify-content-center mb-5 mx-5">
+        <Row className="justify-content-center px-1">
           <CustomToast show={showToast} onClose={handleToastClose} variant={toastVariant} message={toastMessage} />
           <Form
             className="formulario-cadastro"
@@ -204,7 +204,7 @@ export default function Associar(props) {
             onSubmit={salvarAssociado}
           >
             <Form.Row>
-              <h3 className="py-3">
+              <h3 className="margin-left-5 py-3">
                 <FontAwesomeIcon color="blue" icon={faPlane} size="1x" className="mr-2" />
                 <FontAwesomeIcon color="blue" icon={faCar} size="1x" className="mr-2" />
                 Modalidade Principal
@@ -231,7 +231,7 @@ export default function Associar(props) {
               />
             </Form.Row>
             <Form.Row>
-              <h3 className="py-3">
+              <h3 className="margin-left-5 py-3">
                 <FontAwesomeIcon color="blue" icon={faUser} size="1x" className="mr-2" />
                 Dados do usuário
               </h3>
@@ -309,7 +309,7 @@ export default function Associar(props) {
             
             <Form.Row>
               
-              <h3 className="py-3">
+              <h3 className="margin-left-5 py-3">
                 <FontAwesomeIcon color="blue" icon={faPhoneAlt} size="1x" className="mr-2" />
                 Contato
               </h3>
@@ -398,7 +398,7 @@ export default function Associar(props) {
               </Form.Group>
             </Form.Row>
             <Form.Row>
-              <h3 className="py-3">
+              <h3 className="margin-left-5 py-3">
                 <FontAwesomeIcon color="blue" icon={faHome} size="1x" className="mr-2" />
                 Endereço
               </h3>
