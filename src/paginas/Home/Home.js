@@ -28,7 +28,6 @@ class Home extends Component {
     return dados ? (
       <>
         <Parallax
-          //blur={{ min: -15, max: 15 }}
           bgImage={apiHost + "/imagem/" + dados.principal.fundo}
           bgImageAlt={dados.principal.fundoAlt}
           strength={200}
@@ -40,16 +39,18 @@ class Home extends Component {
               left: 0,
               width: '100%',
               height: '100%',
-              background: 'rgba(0, 0, 0, 0.5)', // ajuste a transparência conforme necessário
+              background: 'rgba(0, 0, 0, 0.8)', // ajuste a transparência conforme necessário
             }}
           ></div>
           <section className="principal py-5" id="sobrenos">
             <SobreNos principal={dados.principal}/>
+            
             {/*Tem que adicionar um botão que leve à pagina de associar após o texto.*/}
           </section>
         </Parallax>
         <section className="fundo-preto py-5 text-center" id="idnoticias">
           <Noticias />
+          
         </section>
         <Parallax
           bgImage={apiHost + dados.contato.fundo}

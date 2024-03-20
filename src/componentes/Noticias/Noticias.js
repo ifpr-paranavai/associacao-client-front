@@ -118,7 +118,7 @@ function Noticias() {
                       padding: 0,
                       fontFamily: "Arial",
                       wordWrap: "break-word",
-                      color: "black",
+                      color: "#00A7E0",
                       cursor: "pointer",
                       transition: "color 0.2s ease",
                     }}
@@ -165,8 +165,8 @@ function Noticias() {
         paddingBottom="20px"
         paddingTop="12px"
       ></Box>
-      <Row className="justify-content-end">
-        <Button href="/noticias" variant="secondary" size="lg">
+      <Row className="justify-content-end padding-botao">
+        <Button href="/noticias" size="lg">
           + Notícias
         </Button>
       </Row>
