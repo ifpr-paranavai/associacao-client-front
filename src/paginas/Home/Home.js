@@ -52,7 +52,7 @@ class Home extends Component {
           <Noticias />
         </section>
         <Parallax
-          bgImage={apiHost + "/imagem/" + dados.contato.fundo}
+          bgImage={apiHost + dados.contato.fundo}
           bgImageAlt={dados.contato.fundoAlt}
           strength={-200}
         >
