@@ -6,5 +6,10 @@
     font-size: 100pt !important;
 }
 
+.cor-botao{
+    background-color: rgb(0, 167, 224);
+}
 
-
+.padding-botao{
+    padding-right: 10%;
+}

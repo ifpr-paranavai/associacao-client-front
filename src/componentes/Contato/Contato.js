@@ -59,10 +59,10 @@ function Contato (props) {
             { props.titulo }
           </h1>
         </Row>
-        <Form className = "p-5 mb-4 mx-5 formulario-contato" noValidate validated={validated} onSubmit={enviarMensagem}>
+        <Form className = "p-8 mb-8 mx-8 formulario-contato" noValidate validated={validated} onSubmit={enviarMensagem}>
         <Row>
           <Col xs={12}  md={6}>
-            <Form.Group controlId="nomeC">
+            <Form.Group  controlId="nomeC">
               <Form.Label>Nome</Form.Label>
               <Form.Control
                 required
