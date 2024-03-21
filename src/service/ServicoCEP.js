@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const brasilApiURL = "https://brasilapi.com.br/api";
+const brasilAbertoURL = "https://api.brasilaberto.com";
 
-export const brasilAPI = axios.create({
-  baseURL: brasilApiURL,
+export const brasilAberto = axios.create({
+  baseURL: brasilAbertoURL,
 });
 
 export const buscaCEP = async (cep) => {
-  const { data } = await brasilAPI.get(`/cep/v1/${cep}`);
+  const { data } = await brasilAberto.get(`/v1/zipcode/${cep}`);
   return data;
 };
