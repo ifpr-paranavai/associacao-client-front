@@ -89,9 +89,9 @@ function Noticias() {
   }, [searchValue, page, rowsPerPage]);
 
   return (
-    <Container>
+    <Container >
       <Row className="justify-content-center">
-        <h1 className="mb-3 mt-3 text-dark text-xs-center">Notícias</h1>
+        <h1 className="mb-3 mt-3 text-white text-xs-center">Notícias</h1>
       </Row>
       <Grid container spacing={3}>
         {noticias.map((noticia) => (
@@ -101,7 +101,7 @@ function Noticias() {
                 <CardMedia
                   component="img"
                   alt="Imagem da Noticia"
-                  height="220"
+                  height="75"
                   image={noticia.previewUrl}
                   title="Imagem da Noticia"
                 />
@@ -117,6 +117,7 @@ function Noticias() {
                       border: "none",
                       padding: 0,
                       fontFamily: "Arial",
+                      fontSize: 20,
                       wordWrap: "break-word",
                       color: "#00A7E0",
                       cursor: "pointer",
@@ -135,7 +136,7 @@ function Noticias() {
                 <p
                   style={{
                     fontFamily: "Arial",
-                    fontSize: 16,
+                    fontSize: 17,
                     wordWrap: "break-word",
                   }}
                 >
