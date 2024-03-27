@@ -1,30 +1,21 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Paper,
   Card,
   Grid,
   CardContent,
   CardMedia,
-  CardActions,
-  Avatar,
-  IconButton,
   Container,
-  TableRow,
-  TableCell,
-  TablePagination,
-  LinearProgress,
-  InputAdornment,
 } from "@material-ui/core";
 import { Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { formatarData } from "../../uteis/formatarData";
 import NoticiaService from "../../service/HomeService";
 import { useNotify } from "../../contextos/Notificacao";
-import styles from "./estilo.css";
+
 import ReactQuill from "react-quill";
-import TextField from "@material-ui/core/TextField";
-import { Search as SearchIcon } from "@material-ui/icons";
+
+
 import API from "../../Api";
 
 function Noticias() {
