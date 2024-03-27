@@ -8,14 +8,10 @@ class HomeService {
         fundoAlt: "Imagem de fundo Contato",
       },
       principal: {
-        titulo: "AMAER",
-        subtitulo: "Texto sobre a associação aeromodelismo.",
+        titulo: "Quem Somos?",
+        subtitulo: "A AMAER é uma comunidade apaixonada pelo aeromodelismo e automodelismo, unindo entusiastas para celebrar o voo e as corridas. Com eventos sociais e competições, a AMAER é uma família unida pela paixão compartilhada por esses emocionantes hobbies, acolhendo tanto iniciantes quanto veteranos.",
         fundo: "home.jpg",
         fundoAlt: "Imagem de fundo Home",
-      },
-      logo: {
-        src: "logo-amaer.png",
-        alt: "Logo da AMAER",
       },
     };
   }
@@ -48,7 +44,7 @@ class HomeService {
       const blob = new Blob([response.data], { type: response.headers['content-type'] });
       const url = window.URL.createObjectURL(blob);
       noticia.url = url;
-  
+
       return noticia;
     } catch (error) {
       console.log(error);

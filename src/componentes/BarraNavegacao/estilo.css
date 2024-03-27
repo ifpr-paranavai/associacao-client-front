@@ -6,7 +6,7 @@
 }
 
 .bg-dark {
-  background-color: black !important;
+  background-color: rgb(0, 0, 0) !important;
 }
 
 .nav-link {
@@ -14,5 +14,5 @@
 }
 
 .nav-link:hover {
-  color: rgb(214, 207, 207) !important;
+  color: rgb(0, 167, 224) !important;
 }

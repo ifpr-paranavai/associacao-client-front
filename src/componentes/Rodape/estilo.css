@@ -7,6 +7,10 @@
 }
 
 .cor-link{
-    color: white;
+    color: #ffffff !important;
 }
 
+.nav-link:hover {
+    color: rgb(0, 167, 224) !important;
+  }
+  

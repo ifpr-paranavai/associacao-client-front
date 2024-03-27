@@ -28,6 +28,7 @@
     "react-bootstrap-date-picker": "^5.1.0",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
+    
     "react-maskedinput": "^4.0.1",
     "react-parallax": "^3.1.2",
     "react-quill": "^2.0.0",
