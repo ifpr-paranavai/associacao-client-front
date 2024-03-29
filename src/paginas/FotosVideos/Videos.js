@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Paper,
   Card,
   Grid,
   CardContent,
   CardMedia,
-  CardActions,
-  Avatar,
   IconButton,
   Container,
-  Button,
   TableRow,
   TableCell,
   TablePagination,
@@ -19,7 +15,7 @@ import {
   Dialog,
   DialogContent,
 } from "@material-ui/core";
-import { Row, Button as ButtonBootstrap } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import VideoService from "../../service/VideosService";
 import { useNotify } from "../../contextos/Notificacao";
 import { Search as SearchIcon } from "@material-ui/icons";
@@ -75,10 +71,11 @@ function Videos() {
       }
     }
     fetchData();
-  }, [searchValue, page, rowsPerPage]);
+  }, [searchValue, page, rowsPerPage, notify]);
 
   function extractVideoId(url) {
     const regex =
+      // eslint-disable-next-line
       /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
     const match = url.match(regex);
     return match ? match[1] : null;
@@ -218,7 +215,7 @@ function Videos() {
           {selectedVideoId && (
             <YouTube
               videoId={selectedVideoId}
-              opts={{ width: "100%", height: "540px", width: "960px" }}
+              opts={{ height: "540px", width: "960px" }}
             />
           )}
         </DialogContent>

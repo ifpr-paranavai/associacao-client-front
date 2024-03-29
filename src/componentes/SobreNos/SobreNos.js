@@ -1,11 +1,10 @@
 import "./estilo.css";
-import { apiHost } from "./../../configuracao.json";
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
 class SobreNos extends Component {
   render() {
-    const { principal, logo } = this.props;
+    const { principal } = this.props;
     return (
       <Container className="text-white h-100">
         <Row className="h-100 align-items-center">

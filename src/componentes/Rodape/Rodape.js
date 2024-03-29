@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare, faInstagramSquare } from "@fortawesome/free-brands-svg-icons";
 import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import { baseRoute, adminHost } from "./../../configuracao.json";
+import { baseRoute } from "./../../configuracao.json";
 
 class Rodape extends Component {
   render() {
