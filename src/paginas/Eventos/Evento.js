@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Paper,
   Card,
-  Grid,
   CardContent,
   CardMedia,
-  CardActions,
-  Link as LinkMaterial,
-  Avatar,
-  IconButton,
   Container,
-  Button,
 } from "@material-ui/core";
-import { Row, Button as ButtonBootstrap } from "react-bootstrap";
+import { Row, Button } from "react-bootstrap";
 import { formatarData } from "../../uteis/formatarData";
 import EventoService from "../../service/EventoService";
 import { useNotify } from "../../contextos/Notificacao";
-import styles from "./estilo.css";
 import { useParams } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
