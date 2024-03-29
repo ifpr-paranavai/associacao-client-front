@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Paper,
   Card,
   Grid,
   CardContent,
   CardMedia,
-  CardActions,
-  Avatar,
   IconButton,
   Container,
-  Button,
   TableRow,
   TableCell,
   TablePagination,
@@ -19,12 +15,11 @@ import {
   Dialog,
   DialogContent,
 } from "@material-ui/core";
-import { Row, Button as ButtonBootstrap } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import FotoService from "../../service/FotosService";
 import { useNotify } from "../../contextos/Notificacao";
 import { Search as SearchIcon } from "@material-ui/icons";
 import TextField from "@material-ui/core/TextField";
-import YouTube from "react-youtube";
 import CloseIcon from "@material-ui/icons/Close";
 
 function Fotos() {
@@ -75,7 +70,7 @@ function Fotos() {
       }
     }
     fetchData();
-  }, [searchValue, page, rowsPerPage]);
+  }, [searchValue, page, rowsPerPage, notify]);
 
   function extractFotoId(url) {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:drive\.google\.com\/file\/d\/)([a-zA-Z0-9_-]+)(?:\/.*)?/;

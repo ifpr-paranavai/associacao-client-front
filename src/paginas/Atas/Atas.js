@@ -1,31 +1,23 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Paper,
   Card,
   Grid,
   CardContent,
-  CardMedia,
-  CardActions,
-  Avatar,
   IconButton,
   Container,
-  Button,
   TableRow,
   TableCell,
   TablePagination,
   LinearProgress,
   InputAdornment,
 } from "@material-ui/core";
-import { Row, Button as ButtonBootstrap } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import GetAppIcon from "@material-ui/icons/GetApp";
-import { formatarData } from "../../uteis/formatarData";
 import AtasService from "../../service/AtasService";
 import { useNotify } from "../../contextos/Notificacao";
-import styles from "./estilo.css";
-import { Link } from "react-router-dom";
-import ReactQuill from "react-quill";
+import "./estilo.css";
 import { Search as SearchIcon } from "@material-ui/icons";
 import API from "../../Api";
 import TextField from "@material-ui/core/TextField";
