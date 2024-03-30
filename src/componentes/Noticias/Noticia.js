@@ -50,34 +50,39 @@ function Noticia() {
         <h1 className="mb-3 mt-3 text-dark text-xs-center">{noticia.titulo}</h1>
       </Row>
       <Card style={{ borderRadius: "10px" }}>
-        <div style={{ display: "flex", justifyContent: "center", margin: "50px 0"  }}>
-          <CardMedia
-            component="img"
-            alt="Imagem do Evento"
-            image={noticia.url}
-            title="Imagem do Evento"
-            style={{
-              objectFit: "cover",
-              width: "40%",
-              height: "40%",
-              borderRadius: "10px",
-            }}
-          />
+        {noticia.data_inicio && noticia.descricao ? 
+        <>
+          <div style={{ display: "flex", justifyContent: "center", margin: "50px 0"  }}>
+            <CardMedia
+              component="img"
+              alt="Imagem do Evento"
+              image={noticia.url}
+              title="Imagem do Evento"
+              style={{
+                objectFit: "cover",
+                width: "40%",
+                height: "40%",
+                borderRadius: "10px",
+              }}
+            />
         </div>
 
-        <CardContent>
-          <p
-            style={{
-              fontFamily: "Arial",
-              fontSize: 24,
-              wordWrap: "break-word",
-            }}
-          >
-            {" "}
-            {`Data: ${formatarData(noticia.data_inicio)}`}
-          </p>
-          <ReactQuill value={noticia.descricao} readOnly theme={null} />
-        </CardContent>
+          <CardContent>
+            <p
+              style={{
+                fontFamily: "Arial",
+                fontSize: 24,
+                wordWrap: "break-word",
+              }}
+            >
+              {" "}
+              {`Data: ${formatarData(noticia.data_inicio)}`}
+            </p>
+            <ReactQuill value={noticia.descricao} readOnly theme={null} />
+          </CardContent>
+        </>
+        : 
+        null}
       </Card>
       <Row className="justify-content-end">
         <Button href="/site/" variant="secondary" size="lg">

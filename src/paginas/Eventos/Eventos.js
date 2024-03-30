@@ -38,7 +38,6 @@ function Eventos() {
   };
 
   useEffect(() => {
-    console.log("oiii eventos");
     async function fetchData() {
       try {
         setLoading(true);
