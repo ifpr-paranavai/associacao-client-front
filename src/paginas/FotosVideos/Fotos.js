@@ -20,10 +20,8 @@ import FotoService from "../../service/FotosService";
 import { Search as SearchIcon } from "@material-ui/icons";
 import TextField from "@material-ui/core/TextField";
 import CloseIcon from "@material-ui/icons/Close";
-import { useNotify } from "../../contextos/Notificacao";
 
 function Fotos() {
-  const notify = useNotify();
   const [fotos, setFotos] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [page, setPage] = useState(0);
@@ -70,7 +68,7 @@ function Fotos() {
       }
     }
     fetchData();
-  }, [searchValue, page, rowsPerPage, notify]);
+  }, [searchValue, page, rowsPerPage]);
 
   function extractFotoId(url) {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:drive\.google\.com\/file\/d\/)([a-zA-Z0-9_-]+)(?:\/.*)?/;
