@@ -24,7 +24,6 @@ import CloseIcon from "@material-ui/icons/Close";
 
 function Videos() {
   const [videos, setVideos] = useState([]);
-
   const [searchValue, setSearchValue] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
@@ -70,7 +69,7 @@ function Videos() {
       }
     }
     fetchData();
-  }, [searchValue, page, rowsPerPage, notify]);
+  }, [searchValue, page, rowsPerPage]);
 
   function extractVideoId(url) {
     const regex =
