@@ -17,7 +17,6 @@ import {
 } from "@material-ui/core";
 import { Row } from "react-bootstrap";
 import VideoService from "../../service/VideosService";
-import { useNotify } from "../../contextos/Notificacao";
 import { Search as SearchIcon } from "@material-ui/icons";
 import TextField from "@material-ui/core/TextField";
 import YouTube from "react-youtube";
@@ -25,7 +24,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 function Videos() {
   const [videos, setVideos] = useState([]);
-  const notify = useNotify();
+
   const [searchValue, setSearchValue] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);

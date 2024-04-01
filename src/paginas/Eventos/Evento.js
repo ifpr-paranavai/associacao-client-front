@@ -5,7 +5,6 @@ import {
   Card,
   CardMedia,
   Container,
-  Button,
 } from "@material-ui/core";
 import { Row, Spinner } from "react-bootstrap";
 import { formatarData } from "../../uteis/formatarData";
