@@ -1,5 +1,4 @@
 import API from "./../Api";
-import textoModal from "../uteis/textoModal";
 
 class ServicoAssociado {
   static async cadastrarAssociado(dadosDoFormulario) {

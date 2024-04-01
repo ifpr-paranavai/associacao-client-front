@@ -6,13 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare, faInstagramSquare } from "@fortawesome/free-brands-svg-icons";
 import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import { baseRoute, adminHost } from "./../../configuracao.json";
+import { baseRoute } from "./../../configuracao.json";
 
 class Rodape extends Component {
   render() {
     return (
       <div className="border-dark bg-dark text-light rodape-fundo-preto" id="rodape">
-        <Container className="p-4">
+        <Container className="p-4" style={{marginTop: "20px"}}>
           <Row>
             <Col xs={12} md={4}>
               <Image className="mx-auto d-block" src={logo} height="50" />

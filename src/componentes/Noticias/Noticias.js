@@ -1,60 +1,36 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Paper,
   Card,
   Grid,
   CardContent,
-  CardMedia,
-  CardActions,
-  Avatar,
-  IconButton,
   Container,
-  TableRow,
-  TableCell,
-  TablePagination,
-  LinearProgress,
-  InputAdornment,
+  CardMedia,
 } from "@material-ui/core";
 import { Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { formatarData } from "../../uteis/formatarData";
 import NoticiaService from "../../service/HomeService";
 import { useNotify } from "../../contextos/Notificacao";
-import styles from "./estilo.css";
+import "./estilo.css";
 import ReactQuill from "react-quill";
-import TextField from "@material-ui/core/TextField";
-import { Search as SearchIcon } from "@material-ui/icons";
 import API from "../../Api";
 
 function Noticias() {
   const [noticias, setNoticias] = useState([]);
   const notify = useNotify();
-  const [searchValue, setSearchValue] = useState("");
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(3);
+  const [searchValue] = useState("");
+  const [page] = useState(0);
+  const [rowsPerPage] = useState(3);
+  // eslint-disable-next-line
   const [count, setCount] = useState(0);
+  // eslint-disable-next-line
   const [loading, setLoading] = useState(false);
 
-  const handleSearchChange = (event) => {
-    setSearchValue(event.target.value);
-    setPage(0);
-  };
-
-  async function handlePreview(id) {
-    try {
-      const response = await API.get(`/noticias/${id}/anexo/download`, {
-        responseType: "blob",
-      });
-      const blob = new Blob([response.data], {
-        type: response.headers["content-type"],
-      });
-      const url = window.URL.createObjectURL(blob);
-      return url;
-    } catch (error) {
-      notify.showError(`${error}`);
-    }
-  }
+  // const handleSearchChange = (event) => {
+  //   setSearchValue(event.target.value);
+  //   setPage(0);
+  // };
 
   useEffect(() => {
     async function fetchData() {
@@ -86,7 +62,22 @@ function Noticias() {
       }
     }
     fetchData();
-  }, [searchValue, page, rowsPerPage]);
+
+    async function handlePreview(id) {
+      try {
+        const response = await API.get(`/noticias/${id}/anexo/download`, {
+          responseType: "blob",
+        });
+        const blob = new Blob([response.data], {
+          type: response.headers["content-type"],
+        });
+        const url = window.URL.createObjectURL(blob);
+        return url;
+      } catch (error) {
+        notify.showError(`${error}`);
+      }
+    }
+  }, [searchValue, page, rowsPerPage, notify]);
 
   return (
     <Container >
