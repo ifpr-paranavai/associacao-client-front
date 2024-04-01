@@ -21,10 +21,11 @@ import { Search as SearchIcon } from "@material-ui/icons";
 import TextField from "@material-ui/core/TextField";
 import YouTube from "react-youtube";
 import CloseIcon from "@material-ui/icons/Close";
+import { useNotify } from "../../contextos/Notificacao";
 
 function Videos() {
   const [videos, setVideos] = useState([]);
-
+  const notify = useNotify();
   const [searchValue, setSearchValue] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
