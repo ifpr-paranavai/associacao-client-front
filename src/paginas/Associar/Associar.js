@@ -24,10 +24,14 @@ export default function Associar(props) {
   };
 
   const numberRef = useRef(null);
+  // eslint-disable-next-line
   const [salvando, setSalvando] = useState(false);
   const [buscando, setBuscando] = useState(false);
+  // eslint-disable-next-line
   const [alerta, setAlerta] = useState(false);
+  // eslint-disable-next-line
   const [mensagem, setMensagem] = useState("");
+  // eslint-disable-next-line
   const [tipoAlerta, setTipoAlerta] = useState("error");
   const [validated, setValidated] = useState(false);
   const [associado, setAssociado] = useState({

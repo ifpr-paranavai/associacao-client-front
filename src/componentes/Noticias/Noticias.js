@@ -12,40 +12,25 @@ import { Link } from "react-router-dom";
 import { formatarData } from "../../uteis/formatarData";
 import NoticiaService from "../../service/HomeService";
 import { useNotify } from "../../contextos/Notificacao";
-
+import "./estilo.css";
 import ReactQuill from "react-quill";
-
-
 import API from "../../Api";
 
 function Noticias() {
   const [noticias, setNoticias] = useState([]);
   const notify = useNotify();
-  const [searchValue, setSearchValue] = useState("");
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(3);
+  const [searchValue] = useState("");
+  const [page] = useState(0);
+  const [rowsPerPage] = useState(3);
+  // eslint-disable-next-line
   const [count, setCount] = useState(0);
+  // eslint-disable-next-line
   const [loading, setLoading] = useState(false);
 
-  const handleSearchChange = (event) => {
-    setSearchValue(event.target.value);
-    setPage(0);
-  };
-
-  async function handlePreview(id) {
-    try {
-      const response = await API.get(`/noticias/${id}/anexo/download`, {
-        responseType: "blob",
-      });
-      const blob = new Blob([response.data], {
-        type: response.headers["content-type"],
-      });
-      const url = window.URL.createObjectURL(blob);
-      return url;
-    } catch (error) {
-      notify.showError(`${error}`);
-    }
-  }
+  // const handleSearchChange = (event) => {
+  //   setSearchValue(event.target.value);
+  //   setPage(0);
+  // };
 
   useEffect(() => {
     async function fetchData() {
@@ -77,12 +62,27 @@ function Noticias() {
       }
     }
     fetchData();
-  }, [searchValue, page, rowsPerPage]);
+
+    async function handlePreview(id) {
+      try {
+        const response = await API.get(`/noticias/${id}/anexo/download`, {
+          responseType: "blob",
+        });
+        const blob = new Blob([response.data], {
+          type: response.headers["content-type"],
+        });
+        const url = window.URL.createObjectURL(blob);
+        return url;
+      } catch (error) {
+        notify.showError(`${error}`);
+      }
+    }
+  }, [searchValue, page, rowsPerPage, notify]);
 
   return (
-    <Container>
+    <Container >
       <Row className="justify-content-center">
-        <h1 className="mb-3 mt-3 text-dark text-xs-center">Notícias</h1>
+        <h1 className="mb-3 mt-3 text-white text-xs-center">Notícias</h1>
       </Row>
       <Grid container spacing={3}>
         {noticias.map((noticia) => (
@@ -92,7 +92,7 @@ function Noticias() {
                 <CardMedia
                   component="img"
                   alt="Imagem da Noticia"
-                  height="220"
+                  height="75"
                   image={noticia.previewUrl}
                   title="Imagem da Noticia"
                 />
@@ -108,6 +108,7 @@ function Noticias() {
                       border: "none",
                       padding: 0,
                       fontFamily: "Arial",
+                      fontSize: 20,
                       wordWrap: "break-word",
                       color: "#00A7E0",
                       cursor: "pointer",
@@ -126,7 +127,7 @@ function Noticias() {
                 <p
                   style={{
                     fontFamily: "Arial",
-                    fontSize: 16,
+                    fontSize: 17,
                     wordWrap: "break-word",
                   }}
                 >

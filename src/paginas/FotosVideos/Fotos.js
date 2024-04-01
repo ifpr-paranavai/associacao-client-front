@@ -68,7 +68,7 @@ function Fotos() {
       }
     }
     fetchData();
-  }, [searchValue, page, rowsPerPage]);
+  }, [searchValue, page, rowsPerPage, notify]);
 
   function extractFotoId(url) {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:drive\.google\.com\/file\/d\/)([a-zA-Z0-9_-]+)(?:\/.*)?/;

@@ -6,3 +6,7 @@
 .cor-botao{
     background-color: rgb(0, 167, 224);
 }
+
+.cor-botao:hover{
+    background-color: rgb(0, 154, 206) !important;
+}

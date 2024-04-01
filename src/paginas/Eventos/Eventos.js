@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
+  Card,
   Grid,
   CardContent,
   CardMedia,
   Container,
+  TableRow,
   TableCell,
   TablePagination,
   TableRow,
@@ -16,6 +18,7 @@ import { Row } from "react-bootstrap";
 import { formatarData } from "../../uteis/formatarData";
 import EventoService from "../../service/EventoService";
 import { useNotify } from "../../contextos/Notificacao";
+import "./estilo.css";
 import { Link } from "react-router-dom";
 import ReactQuill from "react-quill";
 import { Search as SearchIcon } from "@material-ui/icons";
@@ -35,21 +38,6 @@ function Eventos() {
     setSearchValue(event.target.value);
     setPage(0);
   };
-
-  async function handlePreview(id) {
-    try {
-      const response = await API.get(`/eventos/${id}/anexo/download`, {
-        responseType: "blob",
-      });
-      const blob = new Blob([response.data], {
-        type: response.headers["content-type"],
-      });
-      const url = window.URL.createObjectURL(blob);
-      return url;
-    } catch (error) {
-      notify.showError(`${error}`);
-    }
-  }
 
   useEffect(() => {
     async function fetchData() {
@@ -81,7 +69,22 @@ function Eventos() {
       }
     }
     fetchData();
-  }, [searchValue, page, rowsPerPage]);
+
+    async function handlePreview(id) {
+      try {
+        const response = await API.get(`/eventos/${id}/anexo/download`, {
+          responseType: "blob",
+        });
+        const blob = new Blob([response.data], {
+          type: response.headers["content-type"],
+        });
+        const url = window.URL.createObjectURL(blob);
+        return url;
+      } catch (error) {
+        notify.showError(`${error}`);
+      }
+    }  
+  }, [searchValue, page, rowsPerPage, notify]);
 
   return (
     <Container>

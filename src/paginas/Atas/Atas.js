@@ -17,6 +17,7 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import AtasService from "../../service/AtasService";
 import { useNotify } from "../../contextos/Notificacao";
+import "./estilo.css";
 import { Search as SearchIcon } from "@material-ui/icons";
 import API from "../../Api";
 import TextField from "@material-ui/core/TextField";
