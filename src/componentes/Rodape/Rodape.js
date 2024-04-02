@@ -12,7 +12,7 @@ class Rodape extends Component {
   render() {
     return (
       <div className="border-dark bg-dark text-light rodape-fundo-preto" id="rodape">
-        <Container className="p-4" style={{marginTop: "20px"}}>
+        <Container className="p-4">
           <Row>
             <Col xs={12} md={4}>
               <Image className="mx-auto d-block" src={logo} height="50" />

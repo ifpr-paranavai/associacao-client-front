@@ -38,9 +38,31 @@ function Noticia() {
 
   if (!noticia.data_inicio && !noticia.descricao) {
     return (
-      <div className="div-spinner">
-        <Spinner animation="border" className="spinner" />
-      </div>
+      <Container>
+        <Box
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="space-between"
+          width="100%"
+          paddingBottom="100px"
+          paddingTop="12px"
+        >
+
+        </Box>
+          <Row className="justify-content-center">
+            <Spinner animation="border" className="spinner" /> 
+          </Row>
+        <Box
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="space-between"
+          width="100%"
+          paddingBottom="20px"
+          paddingTop="12px"
+        ></Box>
+      </Container>
     );
   } else {
     return (
