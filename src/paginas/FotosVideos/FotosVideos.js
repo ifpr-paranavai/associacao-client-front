@@ -11,8 +11,6 @@ class FotosVideos extends Component {
       <>
         <section>
           <Videos />
-        </section>
-        <section>
           <Fotos />
         </section>
       </>
