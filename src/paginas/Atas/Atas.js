@@ -120,7 +120,7 @@ function Atas() {
       <TextField
         placeholder="Buscar por titulo"
         variant="outlined"
-        size="small"
+        size="large"
         style={{ width: "100%", maxWidth: "400px", padding: "15px" }}
         value={searchValue}
         onChange={handleSearchChange}

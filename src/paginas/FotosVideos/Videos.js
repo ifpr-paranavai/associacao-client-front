@@ -95,14 +95,14 @@ function Videos() {
         paddingBottom="100px"
         paddingTop="12px"
       ></Box>
-      <Row className="justify-content-left">
+      <Row className="justify-content-left col-12">
         <h1 className="mb-3 mt-3 text-dark text-xs-center">Videos</h1>
       </Row>
       <TextField
         placeholder="Buscar por titulo"
         variant="outlined"
         size="large"
-        style={{ width: "100%", maxWidth: "400px", padding: "15px" }}
+        style={{ width: "100%", maxWidth: "400px", padding: "15px"}}
         value={searchValue}
         onChange={handleSearchChange}
         InputProps={{
@@ -177,7 +177,7 @@ function Videos() {
           return (
             <Grid>
               <TableCell colSpan={3} align="center">
-                Nenhuma ata encontrada
+                Nenhum video encontrado
               </TableCell>
             </Grid>
           );

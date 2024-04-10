@@ -94,7 +94,7 @@ function Fotos() {
         paddingBottom="100px"
         paddingTop="12px"
       ></Box>
-      <Row className="justify-content-left">
+      <Row className="justify-content-left col-12">
         <h1 className="mb-3 mt-3 text-dark text-xs-center">Fotos</h1>
       </Row>
       <TextField
@@ -176,7 +176,7 @@ function Fotos() {
           return (
             <Grid>
               <TableCell colSpan={3} align="center">
-                Nenhuma ata encontrada
+                Nenhuma foto encontrada
               </TableCell>
             </Grid>
           );
