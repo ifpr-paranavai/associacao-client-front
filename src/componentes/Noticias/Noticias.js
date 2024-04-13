@@ -127,7 +127,7 @@ function Noticias() {
                 <p
                   style={{
                     fontFamily: "Arial",
-                    fontSize: 17,
+                    fontSize: 18,
                     wordWrap: "break-word",
                   }}
                 >
