@@ -87,13 +87,13 @@ function Fotos() {
         paddingBottom="100px"
         paddingTop="12px"
       ></Box>
-      <Row className="justify-content-center">
+      <Row className="justify-content-left col-12">
         <h1 className="mb-3 mt-3 text-dark text-xs-center">Fotos</h1>
       </Row>
       <TextField
         placeholder="Buscar por titulo"
         variant="outlined"
-        size="small"
+        size="large"
         style={{ width: "100%", maxWidth: "400px", padding: "15px" }}
         value={searchValue}
         onChange={handleSearchChange}
@@ -134,7 +134,7 @@ function Fotos() {
                     <CardMedia
                       component="img"
                       alt="Thumbnail do Foto"
-                      height="220"
+                      height="100"
                       image={thumbnailUrl}
                       title="Thumbnail do Foto"
                       onClick={() => openModal(FotoTelaCheia)}
@@ -169,7 +169,7 @@ function Fotos() {
           return (
             <Grid>
               <TableCell colSpan={3} align="center">
-                Nenhuma ata encontrada
+                Nenhuma foto encontrada
               </TableCell>
             </Grid>
           );

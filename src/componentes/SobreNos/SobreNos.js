@@ -10,7 +10,7 @@ class SobreNos extends Component {
         <Row className="h-100 align-items-left">
           <Col className="px-lg-5 d-flex flex-column justify-content-center shadow-lg">
             <h1 className="text-center">{principal.titulo}</h1>
-            <p className="mb-10 lead text-center">{principal.subtitulo}</p>
+            <p className="mb-5 lead text-center">{principal.subtitulo}</p>
           </Col>
         </Row>
       </Container>
