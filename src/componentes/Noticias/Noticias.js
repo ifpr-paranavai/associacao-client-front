@@ -92,12 +92,18 @@ function Noticias() {
                 <CardMedia
                   component="img"
                   alt="Imagem da Noticia"
-                  height="75"
+                  height="220"
                   image={noticia.previewUrl}
                   title="Imagem da Noticia"
                 />
               </Link>
-              <CardContent>
+              <CardContent
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    maxHeight: '174px',
+                  }}
+              >
                 <Link
                   to={`/site/noticia/${noticia.id}`}
                   style={{ textDecoration: "none" }}
@@ -113,6 +119,7 @@ function Noticias() {
                       color: "#00A7E0",
                       cursor: "pointer",
                       transition: "color 0.2s ease",
+                      maxHeight: "20px",
                     }}
                     onMouseEnter={(e) => {
                       e.target.style.color = "blue";
@@ -126,9 +133,11 @@ function Noticias() {
                 </Link>
                 <p
                   style={{
+                    marginTop: "20px",
                     fontFamily: "Arial",
                     fontSize: 18,
                     wordWrap: "break-word",
+                    maxHeight: "50px",
                   }}
                 >
                   {" "}
