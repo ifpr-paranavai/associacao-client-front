@@ -1,3 +1,17 @@
 .borda-cards-eventos{
     box-shadow: rgb(163, 163, 163)  3px 3px 15px  !important;
 }
+
+.card-img-top {
+    height: 200px; /* Adjust as needed */
+    object-fit: cover;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-text:last-child {
+    margin-top: auto;
+}
