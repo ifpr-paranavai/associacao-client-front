@@ -17,7 +17,6 @@ import {
 } from "@material-ui/core";
 import { Row } from "react-bootstrap";
 import VideoService from "../../service/VideosService";
-import { useNotify } from "../../contextos/Notificacao";
 import { Search as SearchIcon } from "@material-ui/icons";
 import TextField from "@material-ui/core/TextField";
 import YouTube from "react-youtube";
@@ -25,7 +24,6 @@ import CloseIcon from "@material-ui/icons/Close";
 
 function Videos() {
   const [videos, setVideos] = useState([]);
-  const notify = useNotify();
   const [searchValue, setSearchValue] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
@@ -71,7 +69,7 @@ function Videos() {
       }
     }
     fetchData();
-  }, [searchValue, page, rowsPerPage, notify]);
+  }, [searchValue, page, rowsPerPage]);
 
   function extractVideoId(url) {
     const regex =
@@ -92,14 +90,14 @@ function Videos() {
         paddingBottom="100px"
         paddingTop="12px"
       ></Box>
-      <Row className="justify-content-center">
+      <Row className="justify-content-left col-12">
         <h1 className="mb-3 mt-3 text-dark text-xs-center">Videos</h1>
       </Row>
       <TextField
         placeholder="Buscar por titulo"
         variant="outlined"
-        size="small"
-        style={{ width: "100%", maxWidth: "400px", padding: "15px" }}
+        size="large"
+        style={{ width: "100%", maxWidth: "400px", padding: "15px"}}
         value={searchValue}
         onChange={handleSearchChange}
         InputProps={{
@@ -174,7 +172,7 @@ function Videos() {
           return (
             <Grid>
               <TableCell colSpan={3} align="center">
-                Nenhuma ata encontrada
+                Nenhum video encontrado
               </TableCell>
             </Grid>
           );

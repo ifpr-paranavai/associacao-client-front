@@ -6,11 +6,11 @@ class SobreNos extends Component {
   render() {
     const { principal } = this.props;
     return (
-      <Container className="text-white h-100">
-        <Row className="h-100 align-items-center">
+      <Container className="h-100">
+        <Row className="h-100 align-items-left">
           <Col className="px-lg-5 d-flex flex-column justify-content-center shadow-lg">
-            <h1 className="text-left">{principal.titulo}</h1>
-            <p className="mb-3 lead">{principal.subtitulo}</p>
+            <h1 className="title-about-us text-center">{principal.titulo}</h1>
+            <p className="mb-5 text-about-us lead text-center">{principal.subtitulo}</p>
           </Col>
         </Row>
       </Container>

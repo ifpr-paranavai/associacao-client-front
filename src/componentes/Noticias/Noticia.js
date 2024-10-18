@@ -19,7 +19,7 @@ import "react-quill/dist/quill.snow.css";
 function Noticia() {
   const [noticia, setNoticia] = useState({});
   // eslint-disable-next-line
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   const notify = useNotify();
   const { id } = useParams();
 

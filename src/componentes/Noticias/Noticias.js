@@ -4,8 +4,8 @@ import {
   Card,
   Grid,
   CardContent,
-  Container,
   CardMedia,
+  Container,
 } from "@material-ui/core";
 import { Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -80,9 +80,9 @@ function Noticias() {
   }, [searchValue, page, rowsPerPage, notify]);
 
   return (
-    <Container>
+    <Container >
       <Row className="justify-content-center">
-        <h1 className="mb-3 mt-3 text-dark text-xs-center">Notícias</h1>
+        <h1 className="mb-3 mt-3 text-white text-xs-center">Notícias</h1>
       </Row>
       <Grid container spacing={3}>
         {noticias.map((noticia) => (
@@ -97,7 +97,13 @@ function Noticias() {
                   title="Imagem da Noticia"
                 />
               </Link>
-              <CardContent>
+              <CardContent
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    maxHeight: '174px',
+                  }}
+              >
                 <Link
                   to={`/site/noticia/${noticia.id}`}
                   style={{ textDecoration: "none" }}
@@ -108,10 +114,12 @@ function Noticias() {
                       border: "none",
                       padding: 0,
                       fontFamily: "Arial",
+                      fontSize: 20,
                       wordWrap: "break-word",
                       color: "#00A7E0",
                       cursor: "pointer",
                       transition: "color 0.2s ease",
+                      maxHeight: "20px",
                     }}
                     onMouseEnter={(e) => {
                       e.target.style.color = "blue";
@@ -125,9 +133,11 @@ function Noticias() {
                 </Link>
                 <p
                   style={{
+                    marginTop: "20px",
                     fontFamily: "Arial",
-                    fontSize: 16,
+                    fontSize: 18,
                     wordWrap: "break-word",
+                    maxHeight: "50px",
                   }}
                 >
                   {" "}

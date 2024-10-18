@@ -1,7 +1,7 @@
 import "./estilo.css";
 import React, { Component } from "react";
-import Fotos from "./Fotos"
-import Videos from "./Videos"
+import Fotos from "./Fotos";
+import Videos from "./Videos";
 
 class FotosVideos extends Component {
   render() {
@@ -10,8 +10,6 @@ class FotosVideos extends Component {
       <>
         <section>
           <Videos />
-        </section>
-        <section>
           <Fotos />
         </section>
       </>
