@@ -15,8 +15,15 @@ const Classificados = () => {
   const fetchClassificados = async () => {
     try {
       const response = await ClassificadosService.obterClassificados(3, pagina);
-      setClassificados(prevClassificados => [...prevClassificados, ...response.rows]);
-      setTotalPages(Math.ceil(response.count / 3));
+      if (response && Array.isArray(response)) {
+        setClassificados(prevClassificados => [...prevClassificados, ...response]);
+        setTotalPages(Math.ceil(response.length / 3));
+      } else if (response && response.rows && Array.isArray(response.rows)) {
+        setClassificados(prevClassificados => [...prevClassificados, ...response.rows]);
+        setTotalPages(Math.ceil(response.count / 3));
+      } else {
+        console.error("Unexpected response format:", response);
+      }
     } catch (error) {
       console.error("Error fetching classificados:", error);
     }
