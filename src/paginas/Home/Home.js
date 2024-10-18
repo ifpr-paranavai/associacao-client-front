@@ -39,7 +39,7 @@ class Home extends Component {
               left: 0,
               width: '100%',
               height: '100%',
-              background: 'rgba(0, 0, 0, 0.8)', // ajuste a transparência conforme necessário
+              background: 'rgba(0, 0, 0, 0.4)', // ajuste a transparência conforme necessário
             }}
           ></div>
           <section className="principal py-5" id="sobrenos">
