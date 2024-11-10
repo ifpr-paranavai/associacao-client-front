@@ -1,11 +1,12 @@
 import API from './../Api';
 
-class ContatoService{
+class ContatoService {
     static async enviarMensagem(dadosDoFormulario) {
         const response = await API.post('/contato', dadosDoFormulario);
-        if (response.status !== 200) {
+        if (response.status !== 201) {
             throw new Error(`Erro ao processar sua requisição: ${response.status}`); 
         }
+        return response.data;
     }
 
     static async buscarTextoModal() {
