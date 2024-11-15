@@ -24,7 +24,7 @@ class BarraNavegacao extends Component {
               <Nav.Link href={baseRoute + "/eventos"}>EVENTOS</Nav.Link>
               <Nav.Link href={baseRoute + "/fotosvideos"}>FOTOS E VÍDEOS</Nav.Link>
               <Nav.Link href={baseRoute + "/classificados"}>CLASSIFICADOS</Nav.Link>
-              <Nav.Link href={baseRoute + "/atas"}>ATAS</Nav.Link>
+              {/* <Nav.Link href={baseRoute + "/atas"}>ATAS</Nav.Link> */}
               <Nav.Link href={baseRoute + "/#contato"}>CONTATO</Nav.Link>
             </Nav>
             <Nav>
