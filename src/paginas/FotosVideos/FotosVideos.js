@@ -10,7 +10,7 @@ class FotosVideos extends Component {
       <>
         <section>
           <Videos />
-          <Fotos />
+          {/* <Fotos /> */}
         </section>
       </>
     )
