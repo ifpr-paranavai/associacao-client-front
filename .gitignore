@@ -22,3 +22,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+node_modules.zip
+node_modules.rar
+build.zip
+build.rar
