@@ -63,7 +63,7 @@ class Home extends Component {
         </Parallax>
       </>
     ) : (
-      <div>fallback</div>
+      <div>fallbackk</div>
     );
   }
 }
